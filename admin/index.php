@@ -11,10 +11,10 @@ $current_time = time();
 
 
 if ($_SESSION['id'] == false) {
-    header('location: ../index.html');
+    header('location: ../index.php');
 } else {
     if (($current_time - $_SESSION['last_acted_on'] > $login_session_duration)) {
-        header('location: ../index.html');
+        header('location: ../index.php');
     }
 ?>
 

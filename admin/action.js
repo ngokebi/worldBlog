@@ -618,7 +618,7 @@ $("#rest_password").click(function (e) {
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut",
                     onHidden: function () {
-                        $(location).attr('href', '../index.html');
+                        $(location).attr('href', '../index.php');
                     }
                 }
                 toastr["success"]("Password has been changed successfully.");
