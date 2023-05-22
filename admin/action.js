@@ -1739,3 +1739,51 @@ $("#post_update").click(function (e) {
         }
     });
 });
+
+// NewsLetter
+$(".newsletter").click(function (e) {
+
+    e.preventDefault();
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": 300,
+        "hideDuration": 1000,
+        "timeOut": 2000,
+        "extendedTimeOut": 1000,
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut",
+        onHidden: function () {
+            window.location.reload();
+        }
+    }
+
+    var email = $('#email').val();
+
+    $.ajax({
+        type: "POST",
+        url: "process.php",
+        data: {
+            action: "newsletter_subscription",
+            email: email,
+
+        },
+        success: function (response) {
+            if (response == true) {
+                toastr["success"]("Subscription Successful");
+
+            } else if (response == false) {
+                toastr["error"]("Error, Something went Wrong");
+
+            }
+        },
+    });
+});

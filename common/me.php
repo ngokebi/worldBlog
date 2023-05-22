@@ -52,7 +52,52 @@
     } ?> <!-- End of the While Loop -->
 </div>
 </div>
+<?php
 
 
+#current blog post
 
-WHERE a.cat_id = :cat_id ORDER BY a.id LIMIT 3
+$blog_id = 5;
+$b_query=$conn->prepare("SELECT * FROM blogs WHERE blog_id=:id AND blog_status=:status");
+$b_query->execute(array(
+    'id' => $blog_id,
+    'status' => 1
+));
+$b_query_get=$b_query->fetch(PDO::FETCH_ASSOC);
+
+/* We check the existence of such data from the database. */
+$single_post_control=$b_query->rowCount();
+if($single_post_control == 0   ){
+    echo "error";
+    exit;
+}
+
+/* next post - previous post*/
+$b_pre_nex=$conn->prepare("SELECT * FROM blogs WHERE   blog_id = (SELECT MIN(blog_id)  FROM blogs WHERE blog_id > :pre_nex_id AND blog_status=:pre_nex_status )  OR blog_id = (SELECT MAX(blog_id) FROM blogs WHERE blog_id < :pre_nex_id AND blog_status=:pre_nex_status) ");
+$b_pre_nex->execute(array(
+    'pre_nex_id' => $blog_id_get,
+    'pre_nex_status' => 1
+));
+
+$control=$b_pre_nex->rowCount();
+if($control == 0 || $control  > 3  ){
+    echo "error";
+    exit;
+}
+
+/* Here, we are splitting our previous and next posts separately.*/
+$prev_post = $b_pre_nex->fetch(PDO::FETCH_ASSOC);
+$next_post = NULL;
+while ( $rows = $b_pre_nex->fetch(PDO::FETCH_ASSOC) ) {
+    $next_post = $rows;
+}
+if(!isset($next_post)) {
+    $next_post = null;
+}
+
+
+echo '<a href="#" style="float:left">'.$prev_post['blog_name'].'</a>';
+
+echo '<a href="#" style="float:right">'.$next_post['blog_name'].'</a>';
+
+

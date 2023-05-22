@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from preview.colorlib.com/theme/callie/category.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Oct 2022 08:44:39 GMT -->
+<!-- Mirrored from preview.colorlib.com/theme/callie/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Oct 2022 08:44:43 GMT -->
 
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Callie HTML Template</title>
+	<title>Blogry - <?php 
+ ?></title>
 
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CMuli:400,700" rel="stylesheet">
 
@@ -22,7 +23,7 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-	<script nonce="74393e5b-34bf-4a22-b500-ed1cc1d1427c">
+	<script nonce="3a0559e4-ce59-49eb-a025-bbb3d6121cec">
 		(function (w, d) {
 			! function (a, e, t, r) {
 				a.zarazData = a.zarazData || {};
@@ -395,7 +396,9 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-offset-1 col-md-10 text-center">
-						<h1 class="text-uppercase">Lifestyle</h1>
+						<h1 class="text-uppercase">Regular Page</h1>
+						<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.</p>
 					</div>
 				</div>
 			</div>
@@ -410,215 +413,79 @@
 
 			<div class="row">
 				<div class="col-md-8">
-
-					<div class="post post-thumb">
-						<a class="post-img" href="blog-post.html"><img
-								src="img/xhot-post-3.jpg.pagespeed.ic.IUSrD64f4i.jpg" alt=""></a>
-						<div class="post-body">
-							<div class="post-category">
-								<a href="category.html">Fashion</a>
-								<a href="category.html">Lifestyle</a>
-							</div>
-							<h3 class="post-title title-lg"><a href="blog-post.html">Mel ut impetus suscipit tincidunt.
-									Cum id ullum laboramus persequeris.</a></h3>
-							<ul class="post-meta">
-								<li><a href="author.html">John Doe</a></li>
-								<li>20 April 2018</li>
-							</ul>
+					<div class="section-row">
+						<div class="section-title">
+							<h3 class="title">Typography</h3>
 						</div>
+						<h1>H1 Typography heading.</h1>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+							labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+							laboris nisi ut aliquip ex ea commodo consequat.</p>
+						<h2>H2 Typography heading.</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+							labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+							laboris nisi ut aliquip ex ea commodo consequat.</p>
+						<h3>H3 Typography heading.</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+							labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+							laboris nisi ut aliquip ex ea commodo consequat.</p>
+						<h4>H4 Typography heading.</h4>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+							labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+							laboris nisi ut aliquip ex ea commodo consequat.</p>
+						<h5>H5 Typography heading.</h5>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+							labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+							laboris nisi ut aliquip ex ea commodo consequat.</p>
 					</div>
-
-					<div class="row">
-
-						<div class="col-md-6">
-							<div class="post">
-								<a class="post-img" href="blog-post.html"><img
-										src="img/xpost-3.jpg.pagespeed.ic.AffxOC9qbo.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-category">
-										<a href="category.html">Lifestyle</a>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Ne bonorum praesent cum, labitur
-											persequeris definitionem quo cu?</a></h3>
-									<ul class="post-meta">
-										<li><a href="author.html">John Doe</a></li>
-										<li>20 April 2018</li>
-									</ul>
-								</div>
-							</div>
+					<div class="section-row">
+						<div class="section-title">
+							<h3 class="title">list style</h3>
 						</div>
-
-
-						<div class="col-md-6">
-							<div class="post">
-								<a class="post-img" href="blog-post.html"><img
-										src="img/xpost-5.jpg.pagespeed.ic.kzmhhTr_u4.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-category">
-										<a href="category.html">Lifestyle</a>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Postea senserit id eos, vivendo
-											periculis ei qui</a></h3>
-									<ul class="post-meta">
-										<li><a href="author.html">John Doe</a></li>
-										<li>20 April 2018</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-
-						<div class="clearfix visible-md visible-lg"></div>
-
-						<div class="col-md-6">
-							<div class="post">
-								<a class="post-img" href="blog-post.html"><img
-										src="img/xpost-9.jpg.pagespeed.ic.msLv82-_nb.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-category">
-										<a href="category.html">Lifestyle</a>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste
-											natus error sit</a></h3>
-									<ul class="post-meta">
-										<li><a href="author.html">John Doe</a></li>
-										<li>20 April 2018</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-
-
-						<div class="col-md-6">
-							<div class="post">
-								<a class="post-img" href="blog-post.html"><img
-										src="img/xpost-7.jpg.pagespeed.ic.Q8au6gIx2I.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-category">
-										<a href="category.html">Health</a>
-										<a href="category.html">Lifestyle</a>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste
-											natus error sit</a></h3>
-									<ul class="post-meta">
-										<li><a href="author.html">John Doe</a></li>
-										<li>20 April 2018</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-
+						<ul class="list-style">
+							<li>
+								<p>Vix mollis admodum ei, vis legimus voluptatum ut.</p>
+							</li>
+							<li>
+								<p>Cu cum alia vide malis. Vel aliquid facilis adolescens.</p>
+							</li>
+							<li>
+								<p>Laudem rationibus vim id. Te per illum ornatus.</p>
+							</li>
+						</ul>
+						<ol class="list-style">
+							<li>
+								<p>Vix mollis admodum ei, vis legimus voluptatum ut.</p>
+							</li>
+							<li>
+								<p>Cu cum alia vide malis. Vel aliquid facilis adolescens.</p>
+							</li>
+							<li>
+								<p>Laudem rationibus vim id. Te per illum ornatus.</p>
+							</li>
+						</ol>
 					</div>
-
-					<div class="post post-row">
-						<a class="post-img" href="blog-post.html"><img
-								src="img/xpost-13.jpg.pagespeed.ic.3HWI31UtTH.jpg" alt=""></a>
-						<div class="post-body">
-							<div class="post-category">
-								<a href="category.html">Travel</a>
-								<a href="category.html">Lifestyle</a>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Mel ut impetus suscipit tincidunt. Cum id
-									ullum laboramus persequeris.</a></h3>
-							<ul class="post-meta">
-								<li><a href="author.html">John Doe</a></li>
-								<li>20 April 2018</li>
-							</ul>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-								incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
+					<div class="section-row">
+						<div class="section-title">
+							<h3 class="title">blockquote</h3>
 						</div>
+						<blockquote class="blockquote">
+							<p>Ei prima graecis consulatu vix, per cu corpora qualisque voluptaria. Bonorum moderatius
+								in per, ius cu albucius voluptatum. Ne ius torquatos dissentiunt. Brute illum utroque eu
+								quo. Cu tota mediocritatem vis, aliquip cotidieque eu ius, cu lorem suscipit eleifend
+								sit.</p>
+							<footer class="blockquote-footer">John Doe</footer>
+						</blockquote>
 					</div>
-
-
-					<div class="post post-row">
-						<a class="post-img" href="blog-post.html"><img src="img/xpost-6.jpg.pagespeed.ic.5ZR6CmnNct.jpg"
-								alt=""></a>
-						<div class="post-body">
-							<div class="post-category">
-								<a href="category.html">Fashion</a>
-								<a href="category.html">Lifestyle</a>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste natus
-									error sit</a></h3>
-							<ul class="post-meta">
-								<li><a href="author.html">John Doe</a></li>
-								<li>20 April 2018</li>
-							</ul>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-								incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
+					<div class="section-row">
+						<div class="section-title">
+							<h3 class="title">buttons</h3>
 						</div>
-					</div>
-
-
-					<div class="post post-row">
-						<a class="post-img" href="blog-post.html"><img src="img/xpost-8.jpg.pagespeed.ic.DsYykWjqaS.jpg"
-								alt=""></a>
-						<div class="post-body">
-							<div class="post-category">
-								<a href="category.html">Fashion</a>
-								<a href="category.html">Lifestyle</a>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Postea senserit id eos, vivendo periculis ei
-									qui</a></h3>
-							<ul class="post-meta">
-								<li><a href="author.html">John Doe</a></li>
-								<li>20 April 2018</li>
-							</ul>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-								incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-						</div>
-					</div>
-
-
-					<div class="post post-row">
-						<a class="post-img" href="blog-post.html"><img
-								src="img/xpost-12.jpg.pagespeed.ic.1W1TIdVgRO.jpg" alt=""></a>
-						<div class="post-body">
-							<div class="post-category">
-								<a href="category.html">Lifestyle</a>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste natus
-									error sit</a></h3>
-							<ul class="post-meta">
-								<li><a href="author.html">John Doe</a></li>
-								<li>20 April 2018</li>
-							</ul>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-								incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-						</div>
-					</div>
-
-
-					<div class="post post-row">
-						<a class="post-img" href="blog-post.html"><img src="img/xpost-7.jpg.pagespeed.ic.Q8au6gIx2I.jpg"
-								alt=""></a>
-						<div class="post-body">
-							<div class="post-category">
-								<a href="category.html">Health</a>
-								<a href="category.html">Lifestyle</a>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Ne bonorum praesent cum, labitur persequeris
-									definitionem quo cu?</a></h3>
-							<ul class="post-meta">
-								<li><a href="author.html">John Doe</a></li>
-								<li>20 April 2018</li>
-							</ul>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-								incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-						</div>
-					</div>
-
-					<div class="section-row loadmore text-center">
-						<a href="#" class="primary-button">Load More</a>
+						<a href="#" class="primary-button">primary</a>
+						<a href="#" class="secondary-button">secondary</a>
 					</div>
 				</div>
 				<div class="col-md-4">
-
-					<div class="aside-widget text-center">
-						<a href="#" style="display: inline-block;margin: auto;">
-							<img class="img-responsive" src="img/xad-3.jpg.pagespeed.ic.u-1xzHBGY2.jpg" alt="">
-						</a>
-					</div>
-
 
 					<div class="aside-widget">
 						<div class="section-title">
@@ -651,22 +518,6 @@
 
 					<div class="aside-widget">
 						<div class="section-title">
-							<h2 class="title">Categories</h2>
-						</div>
-						<div class="category-widget">
-							<ul>
-								<li><a href="#">Lifestyle <span>451</span></a></li>
-								<li><a href="#">Fashion <span>230</span></a></li>
-								<li><a href="#">Technology <span>40</span></a></li>
-								<li><a href="#">Travel <span>38</span></a></li>
-								<li><a href="#">Health <span>24</span></a></li>
-							</ul>
-						</div>
-					</div>
-
-
-					<div class="aside-widget">
-						<div class="section-title">
 							<h2 class="title">Newsletter</h2>
 						</div>
 						<div class="newsletter-widget">
@@ -676,97 +527,6 @@
 								<button class="primary-button">Subscribe</button>
 							</form>
 						</div>
-					</div>
-
-
-					<div class="aside-widget">
-						<div class="section-title">
-							<h2 class="title">Popular Posts</h2>
-						</div>
-
-						<div class="post post-widget">
-							<a class="post-img" href="blog-post.html"><img
-									src="img/xwidget-3.jpg.pagespeed.ic.ALmuwkx9kZ.jpg" alt=""></a>
-							<div class="post-body">
-								<div class="post-category">
-									<a href="category.html">Lifestyle</a>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Ne bonorum praesent cum, labitur
-										persequeris definitionem quo cu?</a></h3>
-							</div>
-						</div>
-
-
-						<div class="post post-widget">
-							<a class="post-img" href="blog-post.html"><img
-									src="img/xwidget-2.jpg.pagespeed.ic.T-nm9p9-ZV.jpg" alt=""></a>
-							<div class="post-body">
-								<div class="post-category">
-									<a href="category.html">Technology</a>
-									<a href="category.html">Lifestyle</a>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Mel ut impetus suscipit tincidunt. Cum
-										id ullum laboramus persequeris.</a></h3>
-							</div>
-						</div>
-
-
-						<div class="post post-widget">
-							<a class="post-img" href="blog-post.html"><img
-									src="img/xwidget-4.jpg.pagespeed.ic.4be-iEbdqI.jpg" alt=""></a>
-							<div class="post-body">
-								<div class="post-category">
-									<a href="category.html">Health</a>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Postea senserit id eos, vivendo
-										periculis ei qui</a></h3>
-							</div>
-						</div>
-
-
-						<div class="post post-widget">
-							<a class="post-img" href="blog-post.html"><img
-									src="img/xwidget-5.jpg.pagespeed.ic.KZmCL3-b0T.jpg" alt=""></a>
-							<div class="post-body">
-								<div class="post-category">
-									<a href="category.html">Health</a>
-									<a href="category.html">Lifestyle</a>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste
-										natus error sit</a></h3>
-							</div>
-						</div>
-
-					</div>
-
-
-					<div class="aside-widget">
-						<div class="section-title">
-							<h2 class="title">Instagram</h2>
-						</div>
-						<div class="galery-widget">
-							<ul>
-								<li><a href="#"><img src="img/xgalery-1.jpg.pagespeed.ic.f5TghSTZd2.jpg" alt=""></a>
-								</li>
-								<li><a href="#"><img src="img/xgalery-2.jpg.pagespeed.ic.IASz6wUrfh.jpg" alt=""></a>
-								</li>
-								<li><a href="#"><img src="img/xgalery-3.jpg.pagespeed.ic.UrbsuynhXi.jpg" alt=""></a>
-								</li>
-								<li><a href="#"><img src="img/xgalery-4.jpg.pagespeed.ic.Vlmjb8Qaia.jpg" alt=""></a>
-								</li>
-								<li><a href="#"><img src="img/xgalery-5.jpg.pagespeed.ic.k5tPdQYweI.jpg" alt=""></a>
-								</li>
-								<li><a href="#"><img src="img/xgalery-6.jpg.pagespeed.ic.c4g0-99fKR.jpg" alt=""></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-
-
-					<div class="aside-widget text-center">
-						<a href="#" style="display: inline-block;margin: auto;">
-							<img class="img-responsive" src="img/xad-1.jpg.pagespeed.ic.dyq7D2snSZ.jpg" alt="">
-						</a>
 					</div>
 
 				</div>
@@ -900,10 +660,10 @@
 	<script defer
 		src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194"
 		integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw=="
-		data-cf-beacon='{"rayId":"758e8d9ed98a76d5","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.8.1","si":100}'
+		data-cf-beacon='{"rayId":"758e8da95de788bf","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.8.1","si":100}'
 		crossorigin="anonymous"></script>
 </body>
 
-<!-- Mirrored from preview.colorlib.com/theme/callie/category.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Oct 2022 08:44:40 GMT -->
+<!-- Mirrored from preview.colorlib.com/theme/callie/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Oct 2022 08:44:43 GMT -->
 
 </html>

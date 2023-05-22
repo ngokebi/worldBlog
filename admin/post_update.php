@@ -16,6 +16,8 @@ $long_desc = $_POST['long_desc'];
 $cat_id = $_POST['cat_id'];
 $uploaded_by = $_POST['uploaded_by'];
 $author = $_POST['author'];
+$id = $_POST['post_id'];
+$old_image = $_POST['old_image'];
 $username = $_SESSION['username'];
 
 
@@ -45,9 +47,10 @@ if (isset($_FILES['main_image'])) {
         switch ($imageType) {
 
             case IMAGETYPE_PNG:
-
+                
                 $imageSrc= imagecreatefrompng($file_tmp); 
                 $tmp= imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
+                unlink($dirPath . $old_image);
                 imagepng($tmp,$dirPath.$imgnewfile);
                 break;           
 
@@ -55,6 +58,7 @@ if (isset($_FILES['main_image'])) {
 
                 $imageSrc= imagecreatefromjpeg($file_tmp); 
                 $tmp= imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
+                unlink($dirPath . $old_image);
                 imagejpeg($tmp,$dirPath.$imgnewfile);
                 break;
 
@@ -62,6 +66,7 @@ if (isset($_FILES['main_image'])) {
 
                 $imageSrc= imagecreatefromgif($file_tmp); 
                 $tmp= imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
+                unlink($dirPath . $old_image);
                 imagegif($tmp,$dirPath.$imgnewfile);
                 break;
 
@@ -71,15 +76,25 @@ if (isset($_FILES['main_image'])) {
                 break;
         }
 
-        $log->logActivity($username, $username . ' - Post was Inserted');
+        $log->logActivity($username, $username . ' - Post was Updated');
 
-        $result = $post->create_posts($title, $slug, $short_desc, $long_desc, $author, $imgnewfile, $cat_id, $uploaded_by);
+        $result = $post->update_posts($title, $slug, $short_desc, $long_desc, $author, $imgnewfile, $cat_id, $uploaded_by, $id);
 
         if ($result) {
-            echo "Post Inserted Successfully";
+            echo "Post Updated Successfully";
         } else {
-            echo "Error Inserting Post";
+            echo "Error Updating Post";
         }
+    }
+} else {
+    $log->logActivity($username, $username . ' - Post was Updated');
+
+    $result = $post->update_posts($title, $slug, $short_desc, $long_desc, $author, $old_image, $cat_id, $uploaded_by, $id);
+
+    if ($result) {
+        echo "Post Updated Successfully";
+    } else {
+        echo "Error Updating Post";
     }
 }
 

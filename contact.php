@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from preview.colorlib.com/theme/callie/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Oct 2022 08:44:43 GMT -->
+<!-- Mirrored from preview.colorlib.com/theme/callie/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Oct 2022 08:44:42 GMT -->
 
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Callie HTML Template</title>
+	<title>Blogry - <?php ?></title>
 
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CMuli:400,700" rel="stylesheet">
 
-	<link type="text/css" rel="stylesheet"
-		href="css/A.bootstrap.min.css%2bfont-awesome.min.css%2bstyle.css%2cMcc.eUDfyxWezC.css.pagespeed.cf.nOx53OB50v.css" />
+	<link type="text/css" rel="stylesheet" href="css/A.bootstrap.min.css%2bfont-awesome.min.css%2bstyle.css%2cMcc.eUDfyxWezC.css.pagespeed.cf.nOx53OB50v.css" />
 
 
 
@@ -22,9 +21,9 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-	<script nonce="3a0559e4-ce59-49eb-a025-bbb3d6121cec">
-		(function (w, d) {
-			! function (a, e, t, r) {
+	<script nonce="1c8778ae-d139-460b-b522-7a59adfc1cde">
+		(function(w, d) {
+			! function(a, e, t, r) {
 				a.zarazData = a.zarazData || {};
 				a.zarazData.executed = [];
 				a.zaraz = {
@@ -32,8 +31,8 @@
 					listeners: []
 				};
 				a.zaraz.q = [];
-				a.zaraz._f = function (e) {
-					return function () {
+				a.zaraz._f = function(e) {
+					return function() {
 						var t = Array.prototype.slice.call(arguments);
 						a.zaraz.q.push({
 							m: e,
@@ -100,8 +99,7 @@
 
 
 					<div class="nav-logo">
-						<a href="index.php" class="logo"><img src="img/xlogo.png.pagespeed.ic.h7IGomVBXp.png"
-								alt=""></a>
+						<a href="index.php" class="logo"><img src="img/xlogo.png.pagespeed.ic.h7IGomVBXp.png" alt=""></a>
 					</div>
 
 
@@ -161,15 +159,12 @@
 
 													<div class="col-md-4">
 														<div class="post post-sm">
-															<a class="post-img" href="blog-post.html"><img
-																	src="img/xpost-10.jpg.pagespeed.ic.QQ_5XVcin0.jpg"
-																	alt=""></a>
+															<a class="post-img" href="blog-post.html"><img src="img/xpost-10.jpg.pagespeed.ic.QQ_5XVcin0.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
 																	<a href="category.html">Travel</a>
 																</div>
-																<h3 class="post-title title-sm"><a
-																		href="blog-post.html">Sed ut perspiciatis, unde
+																<h3 class="post-title title-sm"><a href="blog-post.html">Sed ut perspiciatis, unde
 																		omnis iste natus error sit</a></h3>
 																<ul class="post-meta">
 																	<li><a href="author.html">John Doe</a></li>
@@ -182,16 +177,13 @@
 
 													<div class="col-md-4">
 														<div class="post post-sm">
-															<a class="post-img" href="blog-post.html"><img
-																	src="img/xpost-13.jpg.pagespeed.ic.3HWI31UtTH.jpg"
-																	alt=""></a>
+															<a class="post-img" href="blog-post.html"><img src="img/xpost-13.jpg.pagespeed.ic.3HWI31UtTH.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
 																	<a href="category.html">Travel</a>
 																	<a href="category.html">Lifestyle</a>
 																</div>
-																<h3 class="post-title title-sm"><a
-																		href="blog-post.html">Mel ut impetus suscipit
+																<h3 class="post-title title-sm"><a href="blog-post.html">Mel ut impetus suscipit
 																		tincidunt. Cum id ullum laboramus
 																		persequeris.</a></h3>
 																<ul class="post-meta">
@@ -205,15 +197,12 @@
 
 													<div class="col-md-4">
 														<div class="post post-sm">
-															<a class="post-img" href="blog-post.html"><img
-																	src="img/xpost-12.jpg.pagespeed.ic.1W1TIdVgRO.jpg"
-																	alt=""></a>
+															<a class="post-img" href="blog-post.html"><img src="img/xpost-12.jpg.pagespeed.ic.1W1TIdVgRO.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
 																	<a href="category.html">Lifestyle</a>
 																</div>
-																<h3 class="post-title title-sm"><a
-																		href="blog-post.html">Mel ut impetus suscipit
+																<h3 class="post-title title-sm"><a href="blog-post.html">Mel ut impetus suscipit
 																		tincidunt. Cum id ullum laboramus
 																		persequeris.</a></h3>
 																<ul class="post-meta">
@@ -233,15 +222,12 @@
 
 													<div class="col-md-4">
 														<div class="post post-sm">
-															<a class="post-img" href="blog-post.html"><img
-																	src="img/xpost-5.jpg.pagespeed.ic.kzmhhTr_u4.jpg"
-																	alt=""></a>
+															<a class="post-img" href="blog-post.html"><img src="img/xpost-5.jpg.pagespeed.ic.kzmhhTr_u4.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
 																	<a href="category.html">Lifestyle</a>
 																</div>
-																<h3 class="post-title title-sm"><a
-																		href="blog-post.html">Postea senserit id eos,
+																<h3 class="post-title title-sm"><a href="blog-post.html">Postea senserit id eos,
 																		vivendo periculis ei qui</a></h3>
 																<ul class="post-meta">
 																	<li><a href="author.html">John Doe</a></li>
@@ -254,16 +240,13 @@
 
 													<div class="col-md-4">
 														<div class="post post-sm">
-															<a class="post-img" href="blog-post.html"><img
-																	src="img/xpost-8.jpg.pagespeed.ic.DsYykWjqaS.jpg"
-																	alt=""></a>
+															<a class="post-img" href="blog-post.html"><img src="img/xpost-8.jpg.pagespeed.ic.DsYykWjqaS.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
 																	<a href="category.html">Fashion</a>
 																	<a href="category.html">Lifestyle</a>
 																</div>
-																<h3 class="post-title title-sm"><a
-																		href="blog-post.html">Sed ut perspiciatis, unde
+																<h3 class="post-title title-sm"><a href="blog-post.html">Sed ut perspiciatis, unde
 																		omnis iste natus error sit</a></h3>
 																<ul class="post-meta">
 																	<li><a href="author.html">John Doe</a></li>
@@ -276,15 +259,12 @@
 
 													<div class="col-md-4">
 														<div class="post post-sm">
-															<a class="post-img" href="blog-post.html"><img
-																	src="img/xpost-9.jpg.pagespeed.ic.msLv82-_nb.jpg"
-																	alt=""></a>
+															<a class="post-img" href="blog-post.html"><img src="img/xpost-9.jpg.pagespeed.ic.msLv82-_nb.jpg" alt=""></a>
 															<div class="post-body">
 																<div class="post-category">
 																	<a href="category.html">Lifestyle</a>
 																</div>
-																<h3 class="post-title title-sm"><a
-																		href="blog-post.html">Mel ut impetus suscipit
+																<h3 class="post-title title-sm"><a href="blog-post.html">Mel ut impetus suscipit
 																		tincidunt. Cum id ullum laboramus
 																		persequeris.</a></h3>
 																<ul class="post-meta">
@@ -390,12 +370,10 @@
 
 
 		<div class="page-header">
-			<div class="page-header-bg" style="background-image:url(img/xheader-2.jpg.pagespeed.ic.-moKuxnJQO.jpg)"
-				data-stellar-background-ratio="0.5"></div>
 			<div class="container">
 				<div class="row">
 					<div class="col-md-offset-1 col-md-10 text-center">
-						<h1 class="text-uppercase">Regular Page</h1>
+						<h1 class="text-uppercase">Contacts</h1>
 						<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
 							incididunt ut labore et dolore magna aliqua.</p>
 					</div>
@@ -414,74 +392,42 @@
 				<div class="col-md-8">
 					<div class="section-row">
 						<div class="section-title">
-							<h3 class="title">Typography</h3>
+							<h2 class="title">Contact Information</h2>
 						</div>
-						<h1>H1 Typography heading.</h1>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-							labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-							laboris nisi ut aliquip ex ea commodo consequat.</p>
-						<h2>H2 Typography heading.</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-							labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-							laboris nisi ut aliquip ex ea commodo consequat.</p>
-						<h3>H3 Typography heading.</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-							labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-							laboris nisi ut aliquip ex ea commodo consequat.</p>
-						<h4>H4 Typography heading.</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-							labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-							laboris nisi ut aliquip ex ea commodo consequat.</p>
-						<h5>H5 Typography heading.</h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-							labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-							laboris nisi ut aliquip ex ea commodo consequat.</p>
-					</div>
-					<div class="section-row">
-						<div class="section-title">
-							<h3 class="title">list style</h3>
-						</div>
-						<ul class="list-style">
-							<li>
-								<p>Vix mollis admodum ei, vis legimus voluptatum ut.</p>
+						<p>Malis debet quo et, eam an lorem quaestio. Mea ex quod facer decore, eu nam mazim postea. Eu
+							deleniti pertinacia ius. Ad elitr latine eam, ius sanctus eleifend no, cu primis graecis
+							comprehensam eum. Ne vim prompta consectetuer, etiam signiferumque ea eum.</p>
+						<ul class="contact">
+							<li><i class="fa fa-phone"></i> 202-555-0194</li>
+							<li><i class="fa fa-envelope"></i> <a href="#"><span class="__cf_email__" data-cfemail="3251535e5e5b5772575f535b5e1c515d5f">[email&#160;protected]</span></a>
 							</li>
-							<li>
-								<p>Cu cum alia vide malis. Vel aliquid facilis adolescens.</p>
-							</li>
-							<li>
-								<p>Laudem rationibus vim id. Te per illum ornatus.</p>
-							</li>
+							<li><i class="fa fa-map-marker"></i> 123 6th St.Melbourne, FL 32904</li>
 						</ul>
-						<ol class="list-style">
-							<li>
-								<p>Vix mollis admodum ei, vis legimus voluptatum ut.</p>
-							</li>
-							<li>
-								<p>Cu cum alia vide malis. Vel aliquid facilis adolescens.</p>
-							</li>
-							<li>
-								<p>Laudem rationibus vim id. Te per illum ornatus.</p>
-							</li>
-						</ol>
 					</div>
 					<div class="section-row">
 						<div class="section-title">
-							<h3 class="title">blockquote</h3>
+							<h2 class="title">Mail us</h2>
 						</div>
-						<blockquote class="blockquote">
-							<p>Ei prima graecis consulatu vix, per cu corpora qualisque voluptaria. Bonorum moderatius
-								in per, ius cu albucius voluptatum. Ne ius torquatos dissentiunt. Brute illum utroque eu
-								quo. Cu tota mediocritatem vis, aliquip cotidieque eu ius, cu lorem suscipit eleifend
-								sit.</p>
-							<footer class="blockquote-footer">John Doe</footer>
-						</blockquote>
-					</div>
-					<div class="section-row">
-						<div class="section-title">
-							<h3 class="title">buttons</h3>
-						</div>
-						<a href="#" class="primary-button">primary</a>
-						<a href="#" class="secondary-button">secondary</a>
+						<form>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<input class="input" type="email" name="email" placeholder="Email">
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<input class="input" type="text" name="subject" placeholder="Subject">
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<textarea class="input" name="message" placeholder="Message"></textarea>
+									</div>
+									<button class="primary-button">Submit</button>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -544,8 +490,7 @@
 				<div class="col-md-3">
 					<div class="footer-widget">
 						<div class="footer-logo">
-							<a href="index.php" class="logo"><img src="img/xlogo-alt.png.pagespeed.ic.H0wmeO3OfX.png"
-									alt=""></a>
+							<a href="index.php" class="logo"><img src="img/xlogo-alt.png.pagespeed.ic.H0wmeO3OfX.png" alt=""></a>
 						</div>
 						<p>Nec feugiat nisl pretium fusce id velit ut tortor pretium. Nisl purus in mollis nunc sed.
 							Nunc non blandit massa enim nec.</p>
@@ -619,10 +564,10 @@
 				<div class="col-md-6 col-md-pull-6">
 					<div class="footer-copyright">
 
-						Copyright &copy;<script>
+						Copyright &copy;<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+						<script>
 							document.write(new Date().getFullYear());
-						</script> All rights reserved | This template is made with <i class="fa fa-heart-o"
-							aria-hidden="true"></i> by <a href="https://colorlib.com/" target="_blank">Colorlib</a>
+						</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com/" target="_blank">Colorlib</a>
 
 					</div>
 				</div>
@@ -656,13 +601,9 @@
 
 		gtag('config', 'UA-23581568-13');
 	</script>
-	<script defer
-		src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194"
-		integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw=="
-		data-cf-beacon='{"rayId":"758e8da95de788bf","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.8.1","si":100}'
-		crossorigin="anonymous"></script>
+	<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"758e8da6cce276d5","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.8.1","si":100}' crossorigin="anonymous"></script>
 </body>
 
-<!-- Mirrored from preview.colorlib.com/theme/callie/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Oct 2022 08:44:43 GMT -->
+<!-- Mirrored from preview.colorlib.com/theme/callie/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Oct 2022 08:44:43 GMT -->
 
 </html>

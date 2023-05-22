@@ -1,4 +1,4 @@
-<header id="header">
+
 
     <div id="nav">
 
@@ -6,10 +6,10 @@
             <div class="container">
 
                 <ul class="nav-social">
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="https://www.faebook.com/blogry" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.twitter.com/blogry" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="https://www.google.com/blogry" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a href="https://www.instagram.com/blogry" target="_blank"><i class="fa fa-instagram"></i></a></li>
                 </ul>
 
 
@@ -45,19 +45,19 @@
                         <div class="dropdown">
                             <div class="dropdown-body">
                                 <ul class="dropdown-list">
-                                    <li><a href="category.html">Category page</a></li>
-                                    <li><a href="blog-post.html">Post page</a></li>
-                                    <li><a href="author.html">Author page</a></li>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="contact.html">Contacts</a></li>
-                                    <li><a href="blank.html">Regular</a></li>
+                                    <li><a href="category.php">Category page</a></li>
+                                    <li><a href="blog-post.php">Post page</a></li>
+                                    <li><a href="author.php">Author page</a></li>
+                                    <li><a href="about.php">About Us</a></li>
+                                    <li><a href="contact.php">Contacts</a></li>
+                                    <li><a href="blank.php">Regular</a></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
 
                     <li class="has-dropdown megamenu">
-                        <a href="#">Category</a>
+                        <a href="">Category</a>
                         <div class="dropdown tab-dropdown">
                             <div class="row">
                                 <div class="col-md-2">
@@ -77,9 +77,6 @@
                                         ?>
                                     </ul>
                                 </div>
-
-
-
                                 <div class="col-md-10">
                                     <div class="dropdown-body tab-content">
                                         <?php
@@ -95,7 +92,7 @@
 
                                                         <?php
                                                         $cat_id = $category->id;
-                                                        $sql = "SELECT a.title, b.category_name, a.short_desc, a.long_desc, a.cat_id,
+                                                        $sql = "SELECT a.title, b.category_name, b.id as cat_id, a.short_desc, a.long_desc, a.cat_id, a.main_image,
                                                                 a.id as a_id, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
                                                                 FROM posts a 
                                                                 INNER JOIN category b ON a.cat_id = b.id 
@@ -109,12 +106,12 @@
                                                         ?>
                                                                 <div class="col-md-4">
                                                                     <div class="post post-sm">
-                                                                        <a class="post-img" href="blog-post.php"><img src="img/xpost-10.jpg.pagespeed.ic.QQ_5XVcin0.jpg" alt=""></a>
+                                                                        <a class="post-img" href="blog-post.php?post_id=<?php echo $posts->a_id; ?>"><img src="admin/assets/images/post_images/<?php echo $posts->main_image; ?>" alt=""></a>
                                                                         <div class="post-body">
                                                                             <div class="post-category">
-                                                                                <a href="category.php"><?php echo $posts->category_name ?></a>
+                                                                                <a href="category.php?cat_id=<?php echo $posts->cat_id;?>"><?php echo $posts->category_name ?></a>
                                                                             </div>
-                                                                            <h3 class="post-title title-sm"><a href="blog-post.php"><?php echo $posts->title ?></a></h3>
+                                                                            <h3 class="post-title title-sm"><a href="blog-post.php?post_id=<?php echo $posts->a_id; ?>"><?php echo $posts->title ?></a></h3>
                                                                             <ul class="post-meta">
                                                                                 <li><a href="author.php"><?php echo $posts->author ?></a></li>
                                                                                 <li><?php echo $posts->created_at ?></li>
@@ -135,9 +132,9 @@
                         </div>
                     </li>
 
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Travel</a></li>
+                    <li><a href="about.php">About Us</a></li>
+                    <li><a href="contact.php">Contact Us</a></li>
+                    <li><a href="login.html">Login</a></li>
                 </ul>
 
             </div>
@@ -164,11 +161,9 @@
                 </li>
                 <li><a href="about.php">About Us</a></li>
                 <li><a href="contact.php">Contacts</a></li>
-                <!-- <li><a href="#">Advertise</a></li> -->
+                <li><a href="advertise.php">Advertise</a></li>
             </ul>
             <button class="nav-close nav-aside-close"><span></span></button>
         </div>
 
     </div>
-
-</header>

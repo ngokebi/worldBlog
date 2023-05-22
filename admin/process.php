@@ -244,10 +244,10 @@ function addView($views, $id)
   return $myResp;
 }
 
-function newsletter_subscription($email, $username)
+function newsletter_subscription($email)
 {
   global $newsletter, $log;
-  $log->logActivity($username,  $email . ' subscribed to the Newsletter Posts');
+  $log->logActivity('Local User',  $email . ' subscribed to the Newsletter Posts');
   $myResp = $newsletter->add_email($email);
   return $myResp;
 }
@@ -399,7 +399,7 @@ switch ($_POST['action']) {
     }
 
   case "newsletter_subscription": {
-      echo newsletter_subscription($_POST['email'], $_SESSION['username']);
+      echo newsletter_subscription($_POST['email']);
       break;
     }
 
