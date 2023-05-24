@@ -1,8 +1,10 @@
 <?php
+session_start();
 include "classes/Database.php";
 
 $database = new Database();
 $database = $database->getConnection();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +14,7 @@ $database = $database->getConnection();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Blogry - <?php ?></title>
+    <title>Blogry - <?php ?></title>
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CMuli:400,700" rel="stylesheet">
 
@@ -383,33 +385,7 @@ $database = $database->getConnection();
                     </div>
 
 
-                    <div class="aside-widget">
-                        <div class="section-title">
-                            <h2 class="title">Social Media</h2>
-                        </div>
-                        <div class="social-widget">
-                            <ul>
-                                <li>
-                                    <a href="#" class="social-facebook">
-                                        <i class="fa fa-facebook"></i>
-                                        <span>21.2K<br>Followers</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="social-twitter">
-                                        <i class="fa fa-twitter"></i>
-                                        <span>10.2K<br>Followers</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="social-google-plus">
-                                        <i class="fa fa-google-plus"></i>
-                                        <span>5K<br>Followers</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <?php include "common/social_media.php"; ?>
 
 
                     <div class="aside-widget">
@@ -418,84 +394,59 @@ $database = $database->getConnection();
                         </div>
                         <div class="category-widget">
                             <ul>
-                                <li><a href="#">Lifestyle <span>451</span></a></li>
-                                <li><a href="#">Fashion <span>230</span></a></li>
-                                <li><a href="#">Technology <span>40</span></a></li>
-                                <li><a href="#">Travel <span>38</span></a></li>
-                                <li><a href="#">Health <span>24</span></a></li>
+                                <?php
+                                $sql_cat = "SELECT a.category_name, count(*) as count_post, a.id as cat_id FROM category a
+                                            INNER JOIN posts b ON b.cat_id = a.id GROUP BY a.category_name";
+                                $cat_query = $database->prepare($sql_cat);
+                                $cat_query->execute();
+
+                                $count_posts = $cat_query->fetchAll(PDO::FETCH_OBJ);
+                                // print_r($prev_post);
+                                if ($cat_query->rowCount() > 0) {
+                                    foreach ($count_posts as $count_all) {
+                                ?>
+                                        <li><a href="category.php?cat_id=<?php echo $count_all->cat_id; ?>"><?php echo $count_all->category_name ?> <span><?php echo $count_all->count_post ?></span></a></li>
+                                <?php }
+                                } ?>
                             </ul>
                         </div>
                     </div>
 
 
-                    <div class="aside-widget">
-                        <div class="section-title">
-                            <h2 class="title">Newsletter</h2>
-                        </div>
-                        <div class="newsletter-widget">
-                            <form>
-                                <p>Nec feugiat nisl pretium fusce id velit ut tortor pretium.</p>
-                                <input class="input" name="newsletter" placeholder="Enter Your Email">
-                                <button class="primary-button">Subscribe</button>
-                            </form>
-                        </div>
-                    </div>
+                    <?php include "common/newsletter.php"; ?>
 
 
                     <div class="aside-widget">
                         <div class="section-title">
                             <h2 class="title">Popular Posts</h2>
                         </div>
+                        <?php
+                        $views = 20;
+                        $sql = "SELECT a.title, b.category_name, b.id as cat_id, a.main_image, a.long_desc, a.views, 
+                                a.id as a_id, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
+                                FROM posts a 
+                                INNER JOIN category b ON a.cat_id = b.id WHERE a.views > :views";
+                        $query_4 = $database->prepare($sql);
+                        $query_4->bindParam(':views', $views, PDO::PARAM_INT);
+                        $query_4->execute();
+                        $views = $query_4->fetchAll(PDO::FETCH_OBJ);
 
-                        <div class="post post-widget">
-                            <a class="post-img" href="blog-post.html"><img src="img/xwidget-3.jpg.pagespeed.ic.ALmuwkx9kZ.jpg" alt=""></a>
-                            <div class="post-body">
-                                <div class="post-category">
-                                    <a href="category.html">Lifestyle</a>
+                        if ($query_4->rowCount() > 0) {
+                            foreach ($views as $view) {
+                        ?>
+
+                                <div class="post post-widget">
+                                    <a class="post-img" href="blog-post.php?post_id=<?php echo $view->a_id ?>"><img src="admin/assets/images/post_images/<?php echo $view->main_image; ?>" alt=""></a>
+                                    <div class="post-body">
+                                        <div class="post-category">
+                                            <a href="category.php?cat_id=<?php echo $view->cat_id ?>"><?php echo $view->category_name; ?></a>
+                                        </div>
+                                        <h3 class="post-title"><a href="blog-post.php?post_id=<?php echo $view->a_id ?>"><?php echo $view->title; ?></a></h3>
+                                    </div>
                                 </div>
-                                <h3 class="post-title"><a href="blog-post.html">Ne bonorum praesent cum, labitur
-                                        persequeris definitionem quo cu?</a></h3>
-                            </div>
-                        </div>
 
-
-                        <div class="post post-widget">
-                            <a class="post-img" href="blog-post.html"><img src="img/xwidget-2.jpg.pagespeed.ic.T-nm9p9-ZV.jpg" alt=""></a>
-                            <div class="post-body">
-                                <div class="post-category">
-                                    <a href="category.html">Technology</a>
-                                    <a href="category.html">Lifestyle</a>
-                                </div>
-                                <h3 class="post-title"><a href="blog-post.html">Mel ut impetus suscipit tincidunt. Cum
-                                        id ullum laboramus persequeris.</a></h3>
-                            </div>
-                        </div>
-
-
-                        <div class="post post-widget">
-                            <a class="post-img" href="blog-post.html"><img src="img/xwidget-4.jpg.pagespeed.ic.4be-iEbdqI.jpg" alt=""></a>
-                            <div class="post-body">
-                                <div class="post-category">
-                                    <a href="category.html">Health</a>
-                                </div>
-                                <h3 class="post-title"><a href="blog-post.html">Postea senserit id eos, vivendo
-                                        periculis ei qui</a></h3>
-                            </div>
-                        </div>
-
-
-                        <div class="post post-widget">
-                            <a class="post-img" href="blog-post.html"><img src="img/xwidget-5.jpg.pagespeed.ic.KZmCL3-b0T.jpg" alt=""></a>
-                            <div class="post-body">
-                                <div class="post-category">
-                                    <a href="category.html">Health</a>
-                                    <a href="category.html">Lifestyle</a>
-                                </div>
-                                <h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste
-                                        natus error sit</a></h3>
-                            </div>
-                        </div>
-
+                        <?php }
+                        } ?>
                     </div>
 
                 </div>

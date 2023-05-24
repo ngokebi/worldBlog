@@ -1741,10 +1741,8 @@ $("#post_update").click(function (e) {
 });
 
 // NewsLetter
-$(".newsletter").click(function (e) {
-
+$("#news_letter").click(function (e) {
     e.preventDefault();
-
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -1766,11 +1764,11 @@ $(".newsletter").click(function (e) {
         }
     }
 
-    var email = $('#email').val();
+    var email = $('#emails').val();
 
     $.ajax({
         type: "POST",
-        url: "process.php",
+        url: "admin/process.php",
         data: {
             action: "newsletter_subscription",
             email: email,
@@ -1778,12 +1776,268 @@ $(".newsletter").click(function (e) {
         },
         success: function (response) {
             if (response == true) {
-                toastr["success"]("Subscription Successful");
+                toastr.success("Subscription Successful");
+                $('#emails').val('')
 
             } else if (response == false) {
-                toastr["error"]("Error, Something went Wrong");
+                toastr.error("Error, Something went Wrong");
+                $('#emails').val()
 
             }
         },
     });
+});
+
+
+// User
+
+// Register User
+$("#register_user").click(function (e) {
+    e.preventDefault();
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": 300,
+        "hideDuration": 1000,
+        "timeOut": 2000,
+        "extendedTimeOut": 1000,
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+    //name required
+    var name = $("input#name").val();
+    if (name == "") {
+        toastr.warning('Name is required');
+        $("input#name").focus();
+        return false;
+    }
+    // username required
+    var username = $("#username").val();
+    if (username == "") {
+        toastr.warning('Username is required');
+        $("#username").focus();
+        return false;
+    }
+    // email required
+    var email = $("input#email").val();
+    if (email == "") {
+        toastr.warning('Email is required');
+        $("input#email").focus();
+        return false;
+    }
+    // Password required
+    var password = $("input#password").val();
+    if (password == "") {
+        toastr.warning('Password is required');
+        $("input#password").focus();
+        return false;
+    }
+    // Confirm Password required
+    var confirm_password = $("#confirm_password").val();
+    if (confirm_password != password) {
+        toastr.warning("Password doesnt Match");
+        $("#confirm_password").focus();
+        return false;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "admin/process.php",
+        data: {
+            action: "checkUsername",
+            username: $("#username").val(),
+
+        }, // get all form field value in form
+        beforeSend: function () {
+            $("#register_user").val("Processing...");
+        },
+        success: function (response) {
+            if (response) {
+                toastr.warning(response);
+                $("#register_user").val("Register");
+            } else {
+
+                $.ajax({
+                    type: "POST",
+                    url: "admin/process.php",
+                    data: {
+                        action: "registerUser",
+                        username: $("#username").val(),
+                        name: $("#name").val(),
+                        email: $("#email").val(),
+                        password: $("#password").val(),
+                    }, // get all form field value in form
+                    beforeSend: function () {
+                        $("#register_user").val("Processing...");
+                    },
+                    success: function (response) {
+                        if (response) {
+                            toastr.options = {
+                                "closeButton": true,
+                                "debug": false,
+                                "newestOnTop": false,
+                                "progressBar": true,
+                                "positionClass": "toast-top-right",
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": 300,
+                                "hideDuration": 1000,
+                                "timeOut": 2000,
+                                "extendedTimeOut": 1000,
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut",
+                                onHidden: function () {
+                                    $(location).attr('href', 'login.php');
+                                }
+                            }
+                            toastr["success"]("Account Created Successfully.");
+                            $("#register_user").val("Register");
+                            $("#name").val("");
+                            $("#username").val("");
+                            $("#email").val("");
+                            $("#password").val("");
+
+                        } else {
+                            toastr.options = {
+                                "closeButton": true,
+                                "debug": false,
+                                "newestOnTop": false,
+                                "progressBar": true,
+                                "positionClass": "toast-top-right",
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": 300,
+                                "hideDuration": 1000,
+                                "timeOut": 2000,
+                                "extendedTimeOut": 1000,
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut",
+                                onHidden: function () {
+                                    window.location.reload();
+                                }
+                            }
+                            toastr.warning("Errr. Password Not Strong");
+                            $("#register_user").val("Register");
+                        }
+                    },
+                });
+            }
+        }
+    });
+
+});
+
+// Login User
+$("#login_user").click(function (e) {
+
+    e.preventDefault();
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": 300,
+        "hideDuration": 1000,
+        "timeOut": 2000,
+        "extendedTimeOut": 1000,
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+    //username required
+    var username = $("#username").val();
+    if (username == "") {
+        toastr.warning("Username is required");
+        $("input#username").focus();
+        return false;
+    }
+    // Password required
+    var password = $("input#password").val();
+    if (password == "") {
+        toastr.warning("Password required");
+        $("input#password").focus();
+        return false;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "admin/process.php",
+        data: {
+            action: "loginUser",
+            username: $("#username").val(),
+            password: $("#password").val(),
+        }, // get all form field value in form
+        beforeSend: function () {
+            $("#login_user").val("Processing...");
+        },
+        success: function (response) {
+            if (response == true) {
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": 300,
+                    "hideDuration": 1000,
+                    "timeOut": 2000,
+                    "extendedTimeOut": 1000,
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut",
+                    onHidden: function () {
+                        $(location).attr('href', 'index.php');
+                    }
+                }
+                toastr["success"]("Login Successful.");
+            } else if (response == false) {
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": 300,
+                    "hideDuration": 1000,
+                    "timeOut": 2000,
+                    "extendedTimeOut": 1000,
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut",
+                    onHidden: function () {
+                        window.location.reload();
+                    }
+                }
+                toastr.warning("Error, Incorrect Details");
+
+                $("#login_user").val("Log in");
+            }
+        },
+    });
+
 });

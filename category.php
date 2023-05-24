@@ -370,33 +370,7 @@ $database = $database->getConnection();
 					</div>
 
 
-					<div class="aside-widget">
-						<div class="section-title">
-							<h2 class="title">Social Media</h2>
-						</div>
-						<div class="social-widget">
-							<ul>
-								<li>
-									<a href="#" class="social-facebook">
-										<i class="fa fa-facebook"></i>
-										<span>21.2K<br>Followers</span>
-									</a>
-								</li>
-								<li>
-									<a href="#" class="social-twitter">
-										<i class="fa fa-twitter"></i>
-										<span>10.2K<br>Followers</span>
-									</a>
-								</li>
-								<li>
-									<a href="#" class="social-google-plus">
-										<i class="fa fa-google-plus"></i>
-										<span>5K<br>Followers</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
+					<?php include "common/social_media.php"; ?>
 
 
 					<div class="aside-widget">
@@ -424,18 +398,7 @@ $database = $database->getConnection();
 					</div>
 
 
-					<div class="aside-widget">
-						<div class="section-title">
-							<h2 class="title">Newsletter</h2>
-						</div>
-						<div class="newsletter-widget">
-							<form>
-								<p>You can subscribe to our newsletter and get lastest updates...</p>
-								<input class="input" placeholder="Enter Your Email" id="email">
-								<button class="primary-button" id="newsletter">Subscribe</button>
-							</form>
-						</div>
-					</div>
+					<?php include "common/newsletter.php"; ?>
 
 
 					<div class="aside-widget">

@@ -23,7 +23,7 @@
                     <div class="category-widget">
                         <ul>
                             <?php
-                            $sql_cat = "SELECT a.category_name, count(*) as count_post FROM category a
+                            $sql_cat = "SELECT a.category_name, count(*) as count_post, a.id as cat_id FROM category a
 									INNER JOIN posts b ON b.cat_id = a.id GROUP BY a.category_name";
                             $cat_query = $database->prepare($sql_cat);
                             $cat_query->execute();
@@ -33,7 +33,7 @@
                             if ($cat_query->rowCount() > 0) {
                                 foreach ($count_posts as $count_all) {
                             ?>
-                                    <li><a href="#"><?php echo $count_all->category_name ?> <span><?php echo $count_all->count_post ?></span></a></li>
+                                    <li><a href="category.php?cat_id=<?php echo $count_all->cat_id; ?>"><?php echo $count_all->category_name ?> <span><?php echo $count_all->count_post ?></span></a></li>
                             <?php }
                             } ?>
                         </ul>
@@ -64,10 +64,10 @@
                 <div class="footer-widget">
                     <h3 class="footer-title">Newsletter</h3>
                     <div class="newsletter-widget">
-                        <form>
-                            <p>You can subscribe to our newsletter and get lastest updates..</p>
-                            <input class="input" name="newsletter" placeholder="Enter Your Email">
-                            <button class="primary-button">Subscribe</button>
+                        <form action="" method="POST">
+                            <p>You can subscribe to our newsletter and get lastest updates...</p>
+                            <input class="input" placeholder="Enter Your Email" type="email" id="emails" />
+                            <button class="primary-button" type="submit" id="news_letter">Subscribe</button>
                         </form>
                     </div>
                 </div>

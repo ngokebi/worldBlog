@@ -28,12 +28,14 @@ class User
     public function register($username, $name, $email, $password)
     {
         if (self::validatePassword($password)) {
+            $bio = "";
             $g_password = self::generatePassword($password);
-            $sql = "INSERT INTO Users (username, name, email, password, DateCreated) VALUES (:username, :name, :email, :password, now())";
+            $sql = "INSERT INTO Users (username, name, email, bio, password, DateCreated) VALUES (:username, :name, :email, :bio, :password, now())";
             $query = $this->conn->prepare($sql);
             $query->bindParam(':username', $username, PDO::PARAM_STR);
             $query->bindParam(':name', $name, PDO::PARAM_STR);
             $query->bindParam(':email', $email, PDO::PARAM_STR);
+            $query->bindParam(':bio', $bio, PDO::PARAM_STR);
             $query->bindParam(':password', $g_password, PDO::PARAM_STR);
             $query->execute();
             $lastInsertId = $this->conn->lastInsertId();
@@ -132,14 +134,16 @@ class User
     {
 
         $role = 'author';
+        $bio = "";
         $password = 'Password01';
         $g_password = self::generatePassword($password);
-        $sql = "INSERT INTO Users (username, name, email, role, password, DateCreated) VALUES (:username, :name, :email, :role, :password, now())";
+        $sql = "INSERT INTO Users (username, name, email, role, bio, password, DateCreated) VALUES (:username, :name, :email, :role, :bio, :password, now())";
         $query = $this->conn->prepare($sql);
         $query->bindParam(':username', $username, PDO::PARAM_STR);
         $query->bindParam(':name', $name, PDO::PARAM_STR);
         $query->bindParam(':email', $email, PDO::PARAM_STR);
         $query->bindParam(':role', $role, PDO::PARAM_STR);
+        $query->bindParam(':bio', $bio, PDO::PARAM_STR);
         $query->bindParam(':password', $g_password, PDO::PARAM_STR);
         $query->execute();
         $lastInsertId = $this->conn->lastInsertId();
@@ -165,7 +169,7 @@ class User
 
     public function login($username, $password)
     {
-        $sql = "SELECT * FROM Users WHERE username = :username";
+        $sql = "SELECT *, DATE_FORMAT(DateCreated, '%M %d, %Y') as DateCreated FROM Users WHERE username = :username";
         $query = $this->conn->prepare($sql);
         $query->bindParam(':username', $username, PDO::PARAM_STR);
         $query->execute();
