@@ -1313,6 +1313,102 @@ $(".comment_active").click(function (e) {
     });
 });
 
+// Add Category
+$("#submit_comment").click(function (e) {
+
+    e.preventDefault();
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": 300,
+        "hideDuration": 1000,
+        "timeOut": 2000,
+        "extendedTimeOut": 1000,
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut",
+        onHidden: function () {
+            window.location.reload();
+            // $(location).attr('href', 'category.php');
+        }
+    }
+
+    //comment required
+    var comment = $("#comments").val();
+    if (comment == "") {
+        toastr.warning("Input a Comment");
+        $("input#comments").focus();
+        return false;
+    }
+
+    var user_id = $("#user_id").val();
+    var post_id = $("#post_id").val();
+
+    // alert(comment);
+    // alert(user_id);
+    // alert(post_id);
+
+    $.ajax({
+        type: "POST",
+        url: "admin/process.php",
+        data: {
+            action: "InsertComment",
+            user_id,
+            comment,
+            post_id
+        }, // get all form field value in form
+        beforeSend: function () {
+            $("#submit_comment").val("Processing...");
+        },
+        success: function (response) {
+            if (response == true) {
+                toastr.success("Comment Added");
+                $("#submit_comment").val("Reply");
+                $("#comment").val("");
+
+            } else if (response == false) {
+                toastr.error("Error, Something went Wrong");
+                $("#submit_comment").val("Reply");
+            }
+        },
+    });
+});
+
+// Add Category
+$("#login_comment").click(function (e) {
+
+    e.preventDefault();
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": 300,
+        "hideDuration": 1000,
+        "timeOut": 2000,
+        "extendedTimeOut": 1000,
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+    toastr.warning("Login to add a Comment");
+});
+
+
+
 
 // Post
 
@@ -1964,17 +2060,17 @@ $("#login_user").click(function (e) {
     }
 
     //username required
-    var username = $("#username").val();
+    var username = $("#usernames").val();
     if (username == "") {
         toastr.warning("Username is required");
-        $("input#username").focus();
+        $("input#usernames").focus();
         return false;
     }
     // Password required
-    var password = $("input#password").val();
+    var password = $("input#passwords").val();
     if (password == "") {
         toastr.warning("Password required");
-        $("input#password").focus();
+        $("input#passwords").focus();
         return false;
     }
 
@@ -1983,8 +2079,8 @@ $("#login_user").click(function (e) {
         url: "admin/process.php",
         data: {
             action: "loginUser",
-            username: $("#username").val(),
-            password: $("#password").val(),
+            username: $("#usernames").val(),
+            password: $("#passwords").val(),
         }, // get all form field value in form
         beforeSend: function () {
             $("#login_user").val("Processing...");

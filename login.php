@@ -99,12 +99,12 @@ $database = $database->getConnection();
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
-										<input class="input" type="text" name="username" id="username" placeholder="Username">
+										<input class="input" type="text" id="usernames" placeholder="Username">
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<input class="input" type="password" name="password" id="password" placeholder="Password">
+										<input class="input" type="password" id="passwords" placeholder="Password">
 									</div>
 								</div>
 								<div class="col-md-12">

@@ -203,6 +203,14 @@ function DisapproveComment($id, $username)
   return $myResp;
 }
 
+function InsertComment($username, $user_id, $comments, $post_id)
+{
+  global $comment, $log;
+  $log->logActivity($username, 'Comment Inserted for Post with id ' . $post_id);
+  $myResp = $comment->create_comment($user_id, $comments, $post_id);
+  return $myResp;
+}
+
 
 
 // posts
@@ -378,6 +386,11 @@ switch ($_POST['action']) {
 
   case "DisapproveComment": {
       echo DisapproveComment($_POST['id'], $_SESSION['username']);
+      break;
+    }
+
+    case "InsertComment": {
+      echo InsertComment($_SESSION['username'], $_POST['user_id'], $_POST['comment'], $_POST['post_id']);
       break;
     }
 

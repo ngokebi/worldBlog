@@ -827,6 +827,7 @@ $database = $database->getConnection();
     </script>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script src="admin/action.js"></script>
 </body>
 
 

@@ -1,13 +1,19 @@
 <?php
 session_start();
+
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 include "classes/Database.php";
+include "admin/classes/Comment.php";
 
-$database = new Database();
-$database = $database->getConnection();
-
+$db = new Database();
+$database = $db->getConnection();
+$comment_time = new Comment($db);
 
 $post_id = intval($_GET['post_id']);
-$sql = "SELECT a.title, b.category_name, b.id as cat_id, a.cat_id, a.main_image, a.long_desc, a.views, 
+$sql = "SELECT a.title, b.category_name, b.id as cat_id, a.main_image, a.long_desc, a.views, 
 		a.id as a_id, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
 		FROM posts a 
 		INNER JOIN category b ON a.cat_id = b.id 
@@ -33,7 +39,7 @@ if ($query->rowCount() > 0) {
 			<title>Blogry - <?php ?></title>
 
 			<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CMuli:400,700" rel="stylesheet">
-
+			<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
 			<link type="text/css" rel="stylesheet" href="css/A.bootstrap.min.css%2bfont-awesome.min.css%2bstyle.css%2cMcc.eUDfyxWezC.css.pagespeed.cf.nOx53OB50v.css" />
 		</head>
 
@@ -168,61 +174,37 @@ if ($query->rowCount() > 0) {
 									<h3 class="title">Related Posts</h3>
 								</div>
 								<div class="row">
+									<?php
+									$sql = "SELECT a.title, b.category_name, b.id as cat_id, a.main_image, a.long_desc, a.views, 
+											a.id as a_id, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
+											FROM posts a 
+											INNER JOIN category b ON a.cat_id = b.id 
+										     ORDER BY a.id DESC LIMIT 3";
+									$query = $database->prepare($sql);
+									$query->execute();
 
-									<div class="col-md-4">
-										<div class="post post-sm">
-											<a class="post-img" href="blog-post.html"><img src="img/xpost-4.jpg.pagespeed.ic.Md-c_N8v5Z.jpg" alt=""></a>
-											<div class="post-body">
-												<div class="post-category">
-													<a href="category.html">Health</a>
+									$results = $query->fetchAll(PDO::FETCH_OBJ);
+									if ($query->rowCount() > 0) {
+										foreach ($results as $related) {
+									?>
+											<div class="col-md-4">
+												<div class="post post-sm">
+													<a class="post-img" href="blog-post.php?post_id=<?php echo $related->a_id; ?>"><img src="admin/assets/images/post_images/<?php echo $related->main_image; ?>" alt=""></a>
+													<div class="post-body">
+														<div class="post-category">
+															<a href="category.php?cat_id=<?php echo $related->cat_id; ?>"><?php echo $related->category_name; ?></a>
+														</div>
+														<h3 class="post-title title-sm"><a href="blog-post.php?post_id=<?php echo $related->a_id; ?>"><?php echo $related->title; ?></a></h3>
+														<ul class="post-meta">
+															<li><a href="author.php"><?php echo $related->author; ?></a></li>
+															<li><?php echo $related->created_at; ?></li>
+														</ul>
+													</div>
 												</div>
-												<h3 class="post-title title-sm"><a href="blog-post.html">Postea senserit id eos,
-														vivendo periculis ei qui</a></h3>
-												<ul class="post-meta">
-													<li><a href="author.html">John Doe</a></li>
-													<li>20 April 2018</li>
-												</ul>
 											</div>
-										</div>
-									</div>
+									<?php }
+									} ?>
 
-
-									<div class="col-md-4">
-										<div class="post post-sm">
-											<a class="post-img" href="blog-post.html"><img src="img/xpost-6.jpg.pagespeed.ic.5ZR6CmnNct.jpg" alt=""></a>
-											<div class="post-body">
-												<div class="post-category">
-													<a href="category.html">Fashion</a>
-													<a href="category.html">Lifestyle</a>
-												</div>
-												<h3 class="post-title title-sm"><a href="blog-post.html">Mel ut impetus suscipit
-														tincidunt. Cum id ullum laboramus persequeris.</a></h3>
-												<ul class="post-meta">
-													<li><a href="author.html">John Doe</a></li>
-													<li>20 April 2018</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-
-
-									<div class="col-md-4">
-										<div class="post post-sm">
-											<a class="post-img" href="blog-post.html"><img src="img/xpost-7.jpg.pagespeed.ic.Q8au6gIx2I.jpg" alt=""></a>
-											<div class="post-body">
-												<div class="post-category">
-													<a href="category.html">Health</a>
-													<a href="category.html">Lifestyle</a>
-												</div>
-												<h3 class="post-title title-sm"><a href="blog-post.html">Ne bonorum praesent
-														cum, labitur persequeris definitionem quo cu?</a></h3>
-												<ul class="post-meta">
-													<li><a href="author.html">John Doe</a></li>
-													<li>20 April 2018</li>
-												</ul>
-											</div>
-										</div>
-									</div>
 
 								</div>
 							</div>
@@ -230,11 +212,30 @@ if ($query->rowCount() > 0) {
 
 							<div class="section-row">
 								<div class="section-title">
-									<h3 class="title">3 Comments</h3>
+									<?php
+
+									$post_id = intval($_GET['post_id']);
+									$status = "Active";
+									$sql = "SELECT count(*) AS num
+										FROM comments a 
+										WHERE a.post_id = :post_id AND a.Status = :status";
+									$query = $database->prepare($sql);
+									$query->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+									$query->bindParam(':status', $status, PDO::PARAM_STR);
+									$query->execute();
+									$results = $query->fetchAll(PDO::FETCH_OBJ);
+
+									if ($query->rowCount() > 0) {
+										foreach ($results as $count_comment) {
+
+									?>
+											<h3 class="title"><?php echo $count_comment->num; ?> Comments</h3>
+									<?php }
+									} ?>
 								</div>
 								<div class="post-comments">
 
-									<div class="media">
+									<!-- <div class="media">
 										<div class="media-left">
 											<img class="media-object" src="img/avatar-2.jpg" alt="">
 										</div>
@@ -288,46 +289,62 @@ if ($query->rowCount() > 0) {
 											</div>
 
 										</div>
-									</div>
+									</div> -->
 
+									<?php
 
-									<div class="media">
-										<div class="media-left">
-											<img class="media-object" src="img/xavatar-3.jpg.pagespeed.ic.lcbbvlzFc4.jpg" alt="">
-										</div>
-										<div class="media-body">
-											<div class="media-heading">
-												<h4>John Doe</h4>
-												<span class="time">5 min ago</span>
+									$post_id = intval($_GET['post_id']);
+									$status = "Active";
+									$sql = "SELECT a.user_id, a.comment, a.post_id, a.Status, c.profile_image, c.name, DATE_FORMAT(a.created_at,'%d %b %Y') as created_at
+											FROM comments a 
+											INNER JOIN posts b ON a.post_id = b.id 
+											INNER JOIN users c ON a.user_id = c.id 
+											WHERE a.post_id = :post_id AND a.Status = :status";
+									$query = $database->prepare($sql);
+									$query->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+									$query->bindParam(':status', $status, PDO::PARAM_STR);
+									$query->execute();
+									$results = $query->fetchAll(PDO::FETCH_OBJ);
+
+									if ($query->rowCount() > 0) {
+										foreach ($results as $comments) {
+
+									?>
+											<div class="media">
+												<div class="media-left">
+													<img class="media-object" src="admin/assets/images/users/ <?php echo $comments->profile_image; ?>" alt="">
+												</div>
+												<div class="media-body">
+													<div class="media-heading">
+														<h4><?php echo $comments->name; ?></h4>
+														<span class="time"><?php echo ($comments->created_at); ?></span>
+													</div>
+													<p><?php echo $comments->comment; ?></p>
+												</div>
 											</div>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-												incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-												nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-											</p>
-											<a href="#" class="reply">Reply</a>
-										</div>
-									</div>
-
+									<?php }
+									} ?>
 								</div>
 							</div>
 
 							<?php
-							if ($_SESSION['name']) {
+							if (isset($_SESSION['name'])) {
 							?>
 								<div class="section-row">
 									<div class="section-title">
 										<h3 class="title">Leave a reply</h3>
 									</div>
-									<form class="post-reply">
+									<form class="post-reply" action="" method="POST">
 										<div class="row">
 											<div class="col-md-12">
 												<div class="form-group">
-													<textarea class="input" name="message" placeholder="Message" id="comment"></textarea>
+													<textarea class="input" placeholder="Message" id="comments"></textarea>
 												</div>
 											</div>
 											<div class="col-md-4">
 												<div class="form-group">
-													<input class="input" type="hidden" name="name" placeholder="Name" id="user_id" value="<?php echo $_SESSION['id']; ?>">
+													<input type="hidden" class="input" id="post_id" value="<?php echo intval($_GET['post_id']); ?>">
+													<input class="input" type="hidden" id="user_id" value="<?php echo $_SESSION['id']; ?>">
 												</div>
 											</div>
 											<div class="col-md-12">
@@ -341,7 +358,7 @@ if ($query->rowCount() > 0) {
 									<div class="section-title">
 										<h3 class="title">Leave a reply</h3>
 									</div>
-									<form class="post-reply">
+									<form class="post-reply" action="" method="POST">
 										<div class="row">
 											<div class="col-md-12">
 												<div class="form-group">
@@ -360,7 +377,7 @@ if ($query->rowCount() > 0) {
 											</div>
 											<div class="col-md-12">
 
-												<button class="primary-button" >Submit</button>
+												<button class="primary-button" id="login_comment">Submit</button>
 											</div>
 										</div>
 									</form>
@@ -493,8 +510,10 @@ if ($query->rowCount() > 0) {
 			<script>
 				eval(mod_pagespeed_p$qlVBRQrg);
 			</script>
-
+			<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
 			<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+			<script src="admin/action.js"></script>
 		</body>
 
 		</html>
