@@ -49,7 +49,7 @@ if ($query->rowCount() > 0) {
 
 				<?php include "common/header.php"; ?>
 				<div id="post-header" class="page-header">
-					<div class="page-header-bg" style="background-image: url('admin/assets/images/post_images/<?php echo $main_post->main_image; ?>');" data-stellar-background-ratio="0.5"></div>
+					<div class="page-header-bg" style="background-image: url('admin/assets/images/post_images/<?php echo $main_post->main_image; ?>');  background-repeat: no-repeat;  background-position: center;   background-size: 1800px 720px;" data-stellar-background-ratio="0.5"></div>
 					<div class="container">
 						<div class="row">
 							<div class="col-md-10">

@@ -30,51 +30,57 @@ if (isset($_FILES['main_image'])) {
 
 
 
-    $extension=pathinfo($file_name, PATHINFO_EXTENSION);
+    $extension = pathinfo($file_name, PATHINFO_EXTENSION);
     $allowed_extensions = array("jpg", "jpeg", "png", "gif");
 
     if (!in_array($extension, $allowed_extensions)) {
         echo "Invalid format. Only jpg / jpeg/ png /gif format allowed";
     } else {
 
-        $sourceProperties=getimagesize($file_tmp);
-        $newFileName=time();
-        $dirPath="assets/images/post_images/";
-        $imageType=$sourceProperties[2];
- 
+        // $sourceProperties=getimagesize($file_tmp);
+        // $newFileName=time();
+        $dirPath = "assets/images/post_images/";
+        // $imageType=$sourceProperties[2];
+
+        // $imgnewfile = md5($newFileName).".".$extension;
+
+
+        unlink("assets/images/post_images/" . $old_image);
         $imgnewfile = md5($newFileName).".".$extension;
+        move_uploaded_file($file_tmp, "assets/images/post_images/" . $imgnewfile);
 
-        switch ($imageType) {
 
-            case IMAGETYPE_PNG:
-                
-                $imageSrc= imagecreatefrompng($file_tmp); 
-                $tmp= imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
-                unlink($dirPath . $old_image);
-                imagepng($tmp,$dirPath.$imgnewfile);
-                break;           
+        // switch ($imageType) {
 
-            case IMAGETYPE_JPEG:
+        //     case IMAGETYPE_PNG:
 
-                $imageSrc= imagecreatefromjpeg($file_tmp); 
-                $tmp= imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
-                unlink($dirPath . $old_image);
-                imagejpeg($tmp,$dirPath.$imgnewfile);
-                break;
+        //         $imageSrc= imagecreatefrompng($file_tmp); 
+        //         $tmp= imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
+        //         unlink($dirPath . $old_image);
+        //         imagepng($tmp,$dirPath.$imgnewfile);
+        //         break;           
 
-            case IMAGETYPE_GIF:
+        //     case IMAGETYPE_JPEG:
 
-                $imageSrc= imagecreatefromgif($file_tmp); 
-                $tmp= imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
-                unlink($dirPath . $old_image);
-                imagegif($tmp,$dirPath.$imgnewfile);
-                break;
+        //         $imageSrc= imagecreatefromjpeg($file_tmp); 
+        //         $tmp= imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
+        //         unlink($dirPath . $old_image);
+        //         imagejpeg($tmp,$dirPath.$imgnewfile);
+        //         break;
 
-            default:
-                echo"Invalid Image type.";
-                exit;
-                break;
-        }
+        //     case IMAGETYPE_GIF:
+
+        //         $imageSrc= imagecreatefromgif($file_tmp); 
+        //         $tmp= imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
+        //         unlink($dirPath . $old_image);
+        //         imagegif($tmp,$dirPath.$imgnewfile);
+        //         break;
+
+        //     default:
+        //         echo"Invalid Image type.";
+        //         exit;
+        //         break;
+        // }
 
         $log->logActivity($username, $username . ' - Post was Updated');
 
@@ -98,14 +104,11 @@ if (isset($_FILES['main_image'])) {
     }
 }
 
-function imageResize($imageSrc,$imageWidth,$imageHeight) {
+// function imageResize($imageSrc,$imageWidth,$imageHeight) {
 
-    $newImageWidth = 1920;
-    $newImageHeight = 720;
-    $newImageLayer=imagecreatetruecolor($newImageWidth,$newImageHeight);
-    imagecopyresampled($newImageLayer,$imageSrc,0, 0, 0, 0,$newImageWidth,$newImageHeight,$imageWidth,$imageHeight);
-    return$newImageLayer;
-}
-
-?>
-
+//     $newImageWidth = 500;
+//     $newImageHeight = 400;
+//     $newImageLayer=imagecreatetruecolor($newImageWidth,$newImageHeight);
+//     imagecopyresampled($newImageLayer,$imageSrc,0, 0, 0, 0,$newImageWidth,$newImageHeight,$imageWidth,$imageHeight);
+//     return$newImageLayer;
+// }

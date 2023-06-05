@@ -35,57 +35,70 @@ $database = $database->getConnection();
 
             <div id="hot-post" class="row hot-post">
                 <div class="col-md-8 hot-post-left">
-
-                    <div class="post post-thumb">
-                        <a class="post-img" href="blog-post.html"><img src="img/xhot-post-1.jpg.pagespeed.ic.FvhRkvGSyA.jpg" alt=""></a>
-                        <div class="post-body">
-                            <div class="post-category">
-                                <a href="category.html">Lifestyle</a>
+                    <?php
+                    $sql = "SELECT a.main_image, b.category_name, a.id as a_id, b.id as cat_id, a.title, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
+                    FROM posts a INNER JOIN category b ON a.cat_id = b.id 
+                    ORDER BY a.id DESC limit 1";
+                    $query = $database->prepare($sql);
+                    $query->execute();
+                    $result = $query->fetchAll(PDO::FETCH_OBJ);
+                    if ($query->rowcount() > 0) {
+                        foreach ($result as $latest_post) {
+                    ?>
+                            <div class="post post-thumb">
+                                <a class="post-img" href="blog-post.php?post_id=<?php echo $latest_post->a_id; ?>"><img src="admin/assets/images/post_images/<?php echo $latest_post->main_image; ?>" alt=""></a>
+                                <div class="post-body">
+                                    <div class="post-category">
+                                        <a href="category.php?cat_id=<?php echo $latest_post->cat_id; ?>"><?php echo $latest_post->category_name; ?></a>
+                                    </div>
+                                    <h3 class="post-title title-lg"><a href="blog-post.php?post_id=<?php echo $latest_post->a_id; ?>"><?php echo $latest_post->title; ?></a></h3>
+                                    <ul class="post-meta">
+                                        <li><a href="author.php"><?php echo $latest_post->author; ?></a></li>
+                                        <li><?php echo $latest_post->created_at; ?></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <h3 class="post-title title-lg"><a href="blog-post.html">Postea senserit id eos, vivendo
-                                    periculis ei qui</a></h3>
-                            <ul class="post-meta">
-                                <li><a href="author.html">John Doe</a></li>
-                                <li>20 April 2018</li>
-                            </ul>
-                        </div>
-                    </div>
-
+                    <?php
+                        }
+                    }
+                    ?>
                 </div>
+
                 <div class="col-md-4 hot-post-right">
+                    <?php
+                    $sql = "SELECT a.main_image, b.category_name, a.id as a_id, b.id as cat_id, a.title, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
+                    FROM posts a INNER JOIN category b ON a.cat_id = b.id 
+                    ORDER BY a.id DESC limit 1,2";
+                    $query = $database->prepare($sql);
+                    $query->execute();
+                    $result = $query->fetchAll(PDO::FETCH_OBJ);
+                    if ($query->rowcount() > 0) {
+                        foreach ($result as $latest_post1) {
+                    ?>
 
-                    <div class="post post-thumb">
-                        <a class="post-img" href="blog-post.html"><img src="img/hot-post-2.jpg" alt=""></a>
-                        <div class="post-body">
-                            <div class="post-category">
-                                <a href="category.html">Lifestyle</a>
+                            <div class="post post-thumb">
+                                <a class="post-img" href="blog-post.php?post_id=<?php echo $latest_post1->a_id; ?>"><img src="admin/assets/images/post_images/<?php echo $latest_post1->main_image; ?>" alt=""></a>
+                                <div class="post-body">
+                                    <div class="post-category">
+                                        <a href="category.php?cat_id=<?php echo $latest_post1->cat_id; ?>"><?php echo $latest_post1->category_name; ?></a>
+                                    </div>
+                                    <h3 class="post-title title-lg"><a href="blog-post.php?post_id=<?php echo $latest_post1->a_id; ?>">
+                                            <?php if (strlen($latest_post1->title) > 70) {
+                                                echo substr($latest_post1->title, 0, 70) . '. . .';
+                                            } else {
+                                                echo $latest_post1->title;
+                                            } ?>
+                                        </a></h3>
+                                    <ul class="post-meta">
+                                        <li><a href="author.php"><?php echo $latest_post1->author; ?></a></li>
+                                        <li><?php echo $latest_post1->created_at; ?></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste natus
-                                    error sit</a></h3>
-                            <ul class="post-meta">
-                                <li><a href="author.html">John Doe</a></li>
-                                <li>20 April 2018</li>
-                            </ul>
-                        </div>
-                    </div>
-
-
-                    <div class="post post-thumb">
-                        <a class="post-img" href="blog-post.html"><img src="img/xhot-post-3.jpg.pagespeed.ic.IUSrD64f4i.jpg" alt=""></a>
-                        <div class="post-body">
-                            <div class="post-category">
-                                <a href="category.html">Fashion</a>
-                                <a href="category.html">Lifestyle</a>
-                            </div>
-                            <h3 class="post-title"><a href="blog-post.html">Mel ut impetus suscipit tincidunt. Cum id
-                                    ullum laboramus persequeris.</a></h3>
-                            <ul class="post-meta">
-                                <li><a href="author.html">John Doe</a></li>
-                                <li>20 April 2018</li>
-                            </ul>
-                        </div>
-                    </div>
-
+                    <?php
+                        }
+                    }
+                    ?>
                 </div>
             </div>
 
@@ -107,272 +120,232 @@ $database = $database->getConnection();
                                 <h2 class="title">Recent posts</h2>
                             </div>
                         </div>
+                        <?php
+                        $sql = "SELECT a.main_image, b.category_name, a.id as a_id, b.id as cat_id, a.title, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
+                        FROM posts a INNER JOIN category b ON a.cat_id = b.id 
+                        ORDER BY a.id DESC limit 3,2";
+                        $query = $database->prepare($sql);
+                        $query->execute();
+                        $result = $query->fetchAll(PDO::FETCH_OBJ);
 
-                        <div class="col-md-6">
-                            <div class="post">
-                                <a class="post-img" href="blog-post.html"><img src="img/xpost-1.jpg.pagespeed.ic.k7QUj7kL3E.jpg" alt=""></a>
-                                <div class="post-body">
-                                    <div class="post-category">
-                                        <a href="category.html">Travel</a>
+                        if ($query->rowCount() > 0) {
+                            foreach ($result as $recent) {
+                        ?>
+
+
+                                <div class="col-md-6">
+                                    <div class="post">
+                                        <a class="post-img" href="blog-post.php?post_id=<?php echo $recent->a_id; ?>"><img src="admin/assets/images/post_images/<?php echo $recent->main_image; ?>" alt=""></a>
+                                        <div class="post-body">
+                                            <div class="post-category">
+                                                <a href="category.php?cat_id=<?php echo $recent->cat_id; ?>"><?php echo $recent->category_name; ?></a>
+                                            </div>
+                                            <h3 class="post-title title-lg"><a href="blog-post.php?post_id=<?php echo $recent->a_id; ?>"><?php echo $recent->title; ?></a></h3>
+                                            <ul class="post-meta">
+                                                <li><a href="author.php"><?php echo $recent->author; ?></a></li>
+                                                <li><?php echo $recent->created_at; ?></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste
-                                            natus error sit</a></h3>
-                                    <ul class="post-meta">
-                                        <li><a href="author.html">John Doe</a></li>
-                                        <li>20 April 2018</li>
-                                    </ul>
                                 </div>
-                            </div>
-                        </div>
 
+                        <?php
+                            }
+                        }
 
-                        <div class="col-md-6">
-                            <div class="post">
-                                <a class="post-img" href="blog-post.html"><img src="img/post-2.jpg" alt=""></a>
-                                <div class="post-body">
-                                    <div class="post-category">
-                                        <a href="category.html">Technology</a>
-                                        <a href="category.html">Lifestyle</a>
-                                    </div>
-                                    <h3 class="post-title"><a href="blog-post.html">Ne bonorum praesent cum, labitur
-                                            persequeris definitionem quo cu?</a></h3>
-                                    <ul class="post-meta">
-                                        <li><a href="author.html">John Doe</a></li>
-                                        <li>20 April 2018</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        ?>
 
                         <div class="clearfix visible-md visible-lg"></div>
 
-                        <div class="col-md-6">
-                            <div class="post">
-                                <a class="post-img" href="blog-post.html"><img src="img/post-4.jpg" alt=""></a>
-                                <div class="post-body">
-                                    <div class="post-category">
-                                        <a href="category.html">Health</a>
+                        <?php
+                        $sql = "SELECT a.main_image, b.category_name, a.id as a_id, b.id as cat_id, a.title, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
+                        FROM posts a INNER JOIN category b ON a.cat_id = b.id 
+                        ORDER BY a.id DESC limit 5,2";
+                        $query = $database->prepare($sql);
+                        $query->execute();
+                        $result = $query->fetchAll(PDO::FETCH_OBJ);
+
+                        if ($query->rowCount() > 0) {
+                            foreach ($result as $recent1) {
+                        ?>
+
+
+                                <div class="col-md-6">
+                                    <div class="post">
+                                        <a class="post-img" href="blog-post.php?post_id=<?php echo $recent1->a_id; ?>"><img src="admin/assets/images/post_images/<?php echo $recent1->main_image; ?>" alt=""></a>
+                                        <div class="post-body">
+                                            <div class="post-category">
+                                                <a href="category.php?cat_id=<?php echo $recent1->cat_id; ?>"><?php echo $recent1->category_name; ?></a>
+                                            </div>
+                                            <h3 class="post-title title-lg"><a href="blog-post.php?post_id=<?php echo $recent1->a_id; ?>"><?php echo $recent1->title; ?></a></h3>
+                                            <ul class="post-meta">
+                                                <li><a href="author.php"><?php echo $recent1->author; ?></a></li>
+                                                <li><?php echo $recent1->created_at; ?></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <h3 class="post-title"><a href="blog-post.html">Postea senserit id eos, vivendo
-                                            periculis ei qui</a></h3>
-                                    <ul class="post-meta">
-                                        <li><a href="author.html">John Doe</a></li>
-                                        <li>20 April 2018</li>
-                                    </ul>
                                 </div>
+
+                        <?php
+                            }
+                        }
+
+                        ?>
+
+                    </div>
+
+                    <!-- category section -->
+                    <?php
+                    $sql = "SELECT a.category_name, count(*) as count_post, a.id as cat_id FROM category a 
+                    INNER JOIN posts b ON b.cat_id = a.id 
+                    GROUP BY a.category_name ORDER BY count_post DESC LIMIT 3";
+                    $query = $database->prepare($sql);
+                    $query->execute();
+                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                    // if ($query->rowCount() > 0) {
+                    //     // $cat_id =  $result[0]['category_name'];
+                    //     // $cat_id2 =  $result[1]['category_name'];
+                    //     // $cat_id3 =  $result[2]['category_name'];
+                    // }
+                    ?>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="section-title">
+                                <h2 class="title"><?php echo $result[0]['category_name']; ?></h2>
                             </div>
                         </div>
-
-
-                        <div class="col-md-6">
-                            <div class="post">
-                                <a class="post-img" href="blog-post.html"><img src="img/post-7.jpg" alt=""></a>
-                                <div class="post-body">
-                                    <div class="post-category">
-                                        <a href="category.html">Health</a>
-                                        <a href="category.html">Lifestyle</a>
+                        <?php
+                        $cat_name = $result[0]['category_name'];
+                        $sql = "SELECT a.main_image, b.category_name, a.id as a_id, b.id as cat_id, a.title, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
+                                FROM posts a INNER JOIN category b ON a.cat_id = b.id 
+                                WHERE b.category_name = :cat_name
+                                ORDER BY a.id ASC LIMIT 3";
+                        $query = $database->prepare($sql);
+                        $query->bindParam(':cat_name', $cat_name, PDO::PARAM_STR);
+                        $query->execute();
+                        $result_cat1 = $query->fetchAll(PDO::FETCH_OBJ);
+                        if ($query->rowCount() > 0) {
+                            foreach ($result_cat1 as $cat_one) {
+                        ?>
+                                <div class="col-md-4">
+                                    <div class="post post-sm">
+                                        <a class="post-img" href="blog-post.php?post_id=<?php echo $cat_one->a_id; ?>"><img src="admin/assets/images/post_images/<?php echo $cat_one->main_image; ?>" alt=""></a>
+                                        <div class="post-body">
+                                            <div class="post-category">
+                                                <a href="category.php?cat_id=<?php echo $cat_one->cat_id; ?>"><?php echo $cat_one->category_name; ?></a>
+                                            </div>
+                                            <h3 class="post-title title-lg"><a href="blog-post.php?post_id=<?php echo $cat_one->a_id; ?>">
+                                                    <?php if (strlen($cat_one->title) > 70) {
+                                                        echo substr($cat_one->title, 0, 70) . '. . .';
+                                                    } else {
+                                                        echo $cat_one->title;
+                                                    } ?>
+                                                </a></h3>
+                                            <ul class="post-meta">
+                                                <li><a href="author.php"><?php echo $cat_one->author; ?></a></li>
+                                                <li><?php echo $cat_one->created_at; ?></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste
-                                            natus error sit</a></h3>
-                                    <ul class="post-meta">
-                                        <li><a href="author.html">John Doe</a></li>
-                                        <li>20 April 2018</li>
-                                    </ul>
                                 </div>
-                            </div>
-                        </div>
-
+                        <?php
+                            }
+                        }
+                        ?>
                     </div>
 
 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="section-title">
-                                <h2 class="title">Lifestyle</h2>
+                                <h2 class="title"><?php echo $result[1]['category_name'];; ?></h2>
                             </div>
                         </div>
-
-                        <div class="col-md-4">
-                            <div class="post post-sm">
-                                <a class="post-img" href="blog-post.html"><img src="img/xpost-9.jpg.pagespeed.ic.msLv82-_nb.jpg" alt=""></a>
-                                <div class="post-body">
-                                    <div class="post-category">
-                                        <a href="category.html">Lifestyle</a>
+                        <?php
+                        $cat_name = $result[1]['category_name'];
+                        $sql = "SELECT a.main_image, b.category_name, a.id as a_id, b.id as cat_id, a.title, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
+                                FROM posts a INNER JOIN category b ON a.cat_id = b.id 
+                                WHERE b.category_name = :cat_name
+                                ORDER BY a.id ASC LIMIT 3";
+                        $query = $database->prepare($sql);
+                        $query->bindParam(':cat_name', $cat_name, PDO::PARAM_STR);
+                        $query->execute();
+                        $result_cat2 = $query->fetchAll(PDO::FETCH_OBJ);
+                        if ($query->rowCount() > 0) {
+                            foreach ($result_cat2 as $cat_two) {
+                        ?>
+                                <div class="col-md-4">
+                                    <div class="post post-sm">
+                                        <a class="post-img" href="blog-post.php?post_id=<?php echo $cat_two->a_id; ?>"><img src="admin/assets/images/post_images/<?php echo $cat_two->main_image; ?>" alt=""></a>
+                                        <div class="post-body">
+                                            <div class="post-category">
+                                                <a href="category.php?cat_id=<?php echo $cat_two->cat_id; ?>"><?php echo $cat_two->category_name; ?></a>
+                                            </div>
+                                            <h3 class="post-title title-lg"><a href="blog-post.php?post_id=<?php echo $cat_two->a_id; ?>">
+                                                    <?php if (strlen($cat_two->title) > 70) {
+                                                        echo substr($cat_two->title, 0, 70) . '. . .';
+                                                    } else {
+                                                        echo $cat_two->title;
+                                                    } ?>
+                                                </a></h3>
+                                            <ul class="post-meta">
+                                                <li><a href="author.php"><?php echo $cat_two->author; ?></a></li>
+                                                <li><?php echo $cat_two->created_at; ?></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <h3 class="post-title title-sm"><a href="blog-post.html">Mel ut impetus suscipit
-                                            tincidunt. Cum id ullum laboramus persequeris.</a></h3>
-                                    <ul class="post-meta">
-                                        <li><a href="author.html">John Doe</a></li>
-                                        <li>20 April 2018</li>
-                                    </ul>
                                 </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-4">
-                            <div class="post post-sm">
-                                <a class="post-img" href="blog-post.html"><img src="img/xpost-8.jpg.pagespeed.ic.DsYykWjqaS.jpg" alt=""></a>
-                                <div class="post-body">
-                                    <div class="post-category">
-                                        <a href="category.html">Fashion</a>
-                                        <a href="category.html">Lifestyle</a>
-                                    </div>
-                                    <h3 class="post-title title-sm"><a href="blog-post.html">Postea senserit id eos,
-                                            vivendo periculis ei qui</a></h3>
-                                    <ul class="post-meta">
-                                        <li><a href="author.html">John Doe</a></li>
-                                        <li>20 April 2018</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-4">
-                            <div class="post post-sm">
-                                <a class="post-img" href="blog-post.html"><img src="img/post-11.jpg" alt=""></a>
-                                <div class="post-body">
-                                    <div class="post-category">
-                                        <a href="category.html">Technology</a>
-                                    </div>
-                                    <h3 class="post-title title-sm"><a href="blog-post.html">Sed ut perspiciatis, unde
-                                            omnis iste natus error sit</a></h3>
-                                    <ul class="post-meta">
-                                        <li><a href="author.html">John Doe</a></li>
-                                        <li>20 April 2018</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
+                        <?php
+                            }
+                        }
+                        ?>
                     </div>
 
 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="section-title">
-                                <h2 class="title">Fashion & Travel</h2>
+                                <h2 class="title"><?php echo $result[2]['category_name'];; ?></h2>
                             </div>
                         </div>
-
-                        <div class="col-md-4">
-                            <div class="post post-sm">
-                                <a class="post-img" href="blog-post.html"><img src="img/xpost-10.jpg.pagespeed.ic.QQ_5XVcin0.jpg" alt=""></a>
-                                <div class="post-body">
-                                    <div class="post-category">
-                                        <a href="category.html">Travel</a>
+                        <?php
+                        $cat_name = $result[2]['category_name'];
+                        $sql = "SELECT a.main_image, b.category_name, a.id as a_id, b.id as cat_id, a.title, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
+                                FROM posts a INNER JOIN category b ON a.cat_id = b.id 
+                                WHERE b.category_name = :cat_name
+                                ORDER BY a.id ASC LIMIT 3";
+                        $query = $database->prepare($sql);
+                        $query->bindParam(':cat_name', $cat_name, PDO::PARAM_STR);
+                        $query->execute();
+                        $result_cat3 = $query->fetchAll(PDO::FETCH_OBJ);
+                        if ($query->rowCount() > 0) {
+                            foreach ($result_cat3 as $cat_three) {
+                        ?>
+                                <div class="col-md-4">
+                                    <div class="post post-sm">
+                                        <a class="post-img" href="blog-post.php?post_id=<?php echo $cat_three->a_id; ?>"><img src="admin/assets/images/post_images/<?php echo $cat_three->main_image; ?>" alt=""></a>
+                                        <div class="post-body">
+                                            <div class="post-category">
+                                                <a href="category.php?cat_id=<?php echo $cat_three->cat_id; ?>"><?php echo $cat_three->category_name; ?></a>
+                                            </div>
+                                            <h3 class="post-title title-lg"><a href="blog-post.php?post_id=<?php echo $cat_three->a_id; ?>">
+                                                    <?php if (strlen($cat_three->title) > 70) {
+                                                        echo substr($cat_three->title, 0, 70) . '. . .';
+                                                    } else {
+                                                        echo $cat_three->title;
+                                                    } ?>
+                                                </a></h3>
+                                            <ul class="post-meta">
+                                                <li><a href="author.php"><?php echo $cat_three->author; ?></a></li>
+                                                <li><?php echo $cat_three->created_at; ?></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <h3 class="post-title title-sm"><a href="blog-post.html">Ne bonorum praesent cum,
-                                            labitur persequeris definitionem quo cu?</a></h3>
-                                    <ul class="post-meta">
-                                        <li><a href="author.html">John Doe</a></li>
-                                        <li>20 April 2018</li>
-                                    </ul>
                                 </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-4">
-                            <div class="post post-sm">
-                                <a class="post-img" href="blog-post.html"><img src="img/xpost-12.jpg.pagespeed.ic.1W1TIdVgRO.jpg" alt=""></a>
-                                <div class="post-body">
-                                    <div class="post-category">
-                                        <a href="category.html">Lifestyle</a>
-                                    </div>
-                                    <h3 class="post-title title-sm"><a href="blog-post.html">Sed ut perspiciatis, unde
-                                            omnis iste natus error sit</a></h3>
-                                    <ul class="post-meta">
-                                        <li><a href="author.html">John Doe</a></li>
-                                        <li>20 April 2018</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-4">
-                            <div class="post post-sm">
-                                <a class="post-img" href="blog-post.html"><img src="img/xpost-13.jpg.pagespeed.ic.3HWI31UtTH.jpg" alt=""></a>
-                                <div class="post-body">
-                                    <div class="post-category">
-                                        <a href="category.html">Travel</a>
-                                        <a href="category.html">Lifestyle</a>
-                                    </div>
-                                    <h3 class="post-title title-sm"><a href="blog-post.html">Mel ut impetus suscipit
-                                            tincidunt. Cum id ullum laboramus persequeris.</a></h3>
-                                    <ul class="post-meta">
-                                        <li><a href="author.html">John Doe</a></li>
-                                        <li>20 April 2018</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="section-title">
-                                <h2 class="title">Technology & Health</h2>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="post post-sm">
-                                <a class="post-img" href="blog-post.html"><img src="img/post-4.jpg" alt=""></a>
-                                <div class="post-body">
-                                    <div class="post-category">
-                                        <a href="category.html">Health</a>
-                                    </div>
-                                    <h3 class="post-title title-sm"><a href="blog-post.html">Postea senserit id eos,
-                                            vivendo periculis ei qui</a></h3>
-                                    <ul class="post-meta">
-                                        <li><a href="author.html">John Doe</a></li>
-                                        <li>20 April 2018</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-4">
-                            <div class="post post-sm">
-                                <a class="post-img" href="blog-post.html"><img src="img/xpost-1.jpg.pagespeed.ic.k7QUj7kL3E.jpg" alt=""></a>
-                                <div class="post-body">
-                                    <div class="post-category">
-                                        <a href="category.html">Travel</a>
-                                    </div>
-                                    <h3 class="post-title title-sm"><a href="blog-post.html">Mel ut impetus suscipit
-                                            tincidunt. Cum id ullum laboramus persequeris.</a></h3>
-                                    <ul class="post-meta">
-                                        <li><a href="author.html">John Doe</a></li>
-                                        <li>20 April 2018</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-4">
-                            <div class="post post-sm">
-                                <a class="post-img" href="blog-post.html"><img src="img/post-3.jpg" alt=""></a>
-                                <div class="post-body">
-                                    <div class="post-category">
-                                        <a href="category.html">Lifestyle</a>
-                                    </div>
-                                    <h3 class="post-title title-sm"><a href="blog-post.html">Ne bonorum praesent cum,
-                                            labitur persequeris definitionem quo cu?</a></h3>
-                                    <ul class="post-meta">
-                                        <li><a href="author.html">John Doe</a></li>
-                                        <li>20 April 2018</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
+                        <?php
+                            }
+                        }
+                        ?>
                     </div>
 
                 </div>
@@ -548,7 +521,7 @@ $database = $database->getConnection();
             </div>
 
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-4">
 
                     <div class="post post-widget">
@@ -666,7 +639,7 @@ $database = $database->getConnection();
                     </div>
 
                 </div>
-            </div>
+            </div> -->
 
         </div>
 
@@ -698,25 +671,6 @@ $database = $database->getConnection();
                         </div>
                     </div>
 
-
-                    <div class="post post-row">
-                        <a class="post-img" href="blog-post.html"><img src="img/xpost-1.jpg.pagespeed.ic.k7QUj7kL3E.jpg" alt=""></a>
-                        <div class="post-body">
-                            <div class="post-category">
-                                <a href="category.html">Travel</a>
-                            </div>
-                            <h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste natus
-                                    error sit</a></h3>
-                            <ul class="post-meta">
-                                <li><a href="author.html">John Doe</a></li>
-                                <li>20 April 2018</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-                        </div>
-                    </div>
-
-
                     <div class="post post-row">
                         <a class="post-img" href="blog-post.html"><img src="img/xpost-5.jpg.pagespeed.ic.kzmhhTr_u4.jpg" alt=""></a>
                         <div class="post-body">
@@ -733,7 +687,6 @@ $database = $database->getConnection();
                                 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
                         </div>
                     </div>
-
 
                     <div class="post post-row">
                         <a class="post-img" href="blog-post.html"><img src="img/xpost-6.jpg.pagespeed.ic.5ZR6CmnNct.jpg" alt=""></a>
@@ -752,7 +705,6 @@ $database = $database->getConnection();
                                 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
                         </div>
                     </div>
-
 
                     <div class="post post-row">
                         <a class="post-img" href="blog-post.html"><img src="img/post-7.jpg" alt=""></a>
@@ -776,6 +728,7 @@ $database = $database->getConnection();
                         <a href="#" class="primary-button">Load More</a>
                     </div>
                 </div>
+
                 <div class="col-md-4">
 
                     <div class="aside-widget">

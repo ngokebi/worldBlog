@@ -35,41 +35,42 @@ if (isset($_FILES['main_image'])) {
         echo "Invalid format. Only jpg / jpeg/ png /gif format allowed";
     } else {
 
-        $sourceProperties=getimagesize($file_tmp);
-        $newFileName=time();
+        // $sourceProperties=getimagesize($file_tmp);
+        // $newFileName=time();
         $dirPath="assets/images/post_images/";
-        $imageType=$sourceProperties[2];
+        // $imageType=$sourceProperties[2];
  
-        $imgnewfile = md5($newFileName).".".$extension;
+        // $imgnewfile = md5($newFileName).".".$extension;
+        $imgnewfile = md5($file_name).".".$extension;
 
-        switch ($imageType) {
+        // switch ($imageType) {
 
-            case IMAGETYPE_PNG:
+        //     case IMAGETYPE_PNG:
 
-                $imageSrc= imagecreatefrompng($file_tmp); 
-                $tmp= imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
-                imagepng($tmp,$dirPath.$imgnewfile);
-                break;           
+        //         $imageSrc= imagecreatefrompng($file_tmp); 
+        //         $tmp= imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
+        //         imagepng($tmp,$dirPath.$imgnewfile);
+        //         break;           
 
-            case IMAGETYPE_JPEG:
+        //     case IMAGETYPE_JPEG:
 
-                $imageSrc= imagecreatefromjpeg($file_tmp); 
-                $tmp= imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
-                imagejpeg($tmp,$dirPath.$imgnewfile);
-                break;
+        //         $imageSrc= imagecreatefromjpeg($file_tmp); 
+        //         $tmp= imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
+        //         imagejpeg($tmp,$dirPath.$imgnewfile);
+        //         break;
 
-            case IMAGETYPE_GIF:
+        //     case IMAGETYPE_GIF:
 
-                $imageSrc= imagecreatefromgif($file_tmp); 
-                $tmp= imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
-                imagegif($tmp,$dirPath.$imgnewfile);
-                break;
+        //         $imageSrc= imagecreatefromgif($file_tmp); 
+        //         $tmp= imageResize($imageSrc,$sourceProperties[0],$sourceProperties[1]);
+        //         imagegif($tmp,$dirPath.$imgnewfile);
+        //         break;
 
-            default:
-                echo"Invalid Image type.";
-                exit;
-                break;
-        }
+        //     default:
+        //         echo"Invalid Image type.";
+        //         exit;
+        //         break;
+        // }
 
         $log->logActivity($username, $username . ' - Post was Inserted');
 
@@ -83,14 +84,14 @@ if (isset($_FILES['main_image'])) {
     }
 }
 
-function imageResize($imageSrc,$imageWidth,$imageHeight) {
+// function imageResize($imageSrc,$imageWidth,$imageHeight) {
 
-    $newImageWidth = 1920;
-    $newImageHeight = 720;
-    $newImageLayer=imagecreatetruecolor($newImageWidth,$newImageHeight);
-    imagecopyresampled($newImageLayer,$imageSrc,0, 0, 0, 0,$newImageWidth,$newImageHeight,$imageWidth,$imageHeight);
-    return$newImageLayer;
-}
+//     $newImageWidth = 1920;
+//     $newImageHeight = 720;
+//     $newImageLayer=imagecreatetruecolor($newImageWidth,$newImageHeight);
+//     imagecopyresampled($newImageLayer,$imageSrc,0, 0, 0, 0,$newImageWidth,$newImageHeight,$imageWidth,$imageHeight);
+//     return$newImageLayer;
+// }
 
 ?>
 
