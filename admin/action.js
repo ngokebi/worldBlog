@@ -1884,6 +1884,56 @@ $("#news_letter").click(function (e) {
     });
 });
 
+// Load More Button
+$('#load_more').click(function (e) {
+    e.preventDefault();
+    var row = Number($('#row').val());
+    var allcount = Number($('#all').val());
+    var rowperpage = 3;
+    row = row + rowperpage;
+
+    if (row <= allcount) {
+        $("#row").val(row);
+
+        $.ajax({
+            type: "POST",
+            url: "admin/process.php",
+            data: {
+                action: "loadMore",
+                row: row
+            },
+            beforeSend: function () {
+                $("#load_more").text("Loading...");
+            },
+            success: function (response) {
+
+                setTimeout(function () {
+                    // appending posts after last post with class="post"
+                    $(".post:last").after(response).show().fadeIn("slow");
+                    var rowno = row + rowperpage;
+                    // checking row value is greater than allcount or not
+                    if (rowno > allcount) {
+                        $('#load_more').text("Hide");
+                    } else {
+                        $("#load_more").text("Load more");
+                    }
+                }, 2000);
+            }
+        });
+    } else {
+        $('#load_more').text("Loading...");
+        setTimeout(function () {
+            // When row is greater than allcount then remove all class='post' element after 3 element
+            $('.post:nth-child(3)').nextAll('.post').remove();
+            // Reset the value of row
+            $("#row").val(0);
+
+
+            $('#load_more').text("Load more");
+        }, 2000);
+    }
+});
+
 
 // User
 

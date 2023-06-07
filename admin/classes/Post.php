@@ -125,4 +125,49 @@ class Post
 
         return $stmt->rowCount();
     }
+
+    public function loadMore($row)
+    {
+        $rowperpage = 3;
+
+        $sql = "SELECT a.main_image, b.category_name, a.id as a_id, b.id as cat_id, a.title, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
+        FROM posts a INNER JOIN category b ON a.cat_id = b.id ORDER BY a.id ASC lIMIT :row, :rowperpage";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(":row", $row, PDO::PARAM_INT);
+        $stmt->bindValue(":rowperpage", $rowperpage, PDO::PARAM_INT);
+        $stmt->execute();
+        $datas = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $html = '';
+        if ($stmt->rowCount() > 0) {
+            foreach ($datas as $data) {
+                $post_id = $data->a_id;
+                $main_image = $data->main_image;
+                $category_name = $data->category_name;
+                $author = $data->category_name;
+                $created_at = $data->created_at;
+                $cat_id = $data->cat_id;
+                if (strlen($data->title) > 70) {
+                    $title = substr($data->title, 0, 70) . '. . .';
+                } else {
+                    $title = $data->title;
+                }
+                // Creating HTML structure
+                $html .= '<div class="post post-row">';
+                $html .= '<a class="post-img" href="blog-post.php?post_id=' . $post_id . '"><img src="admin/assets/images/post_images/' . $main_image . '" alt=""></a>';
+                $html .= '<div class="post-body">';
+                $html .= '<div class="post-category">';
+                $html .= '<a href="category.php?cat_id=' . $cat_id . '">' . $category_name . '</a>';
+                $html .= '</div>';
+                $html .= '<h3 class="post-title title-lg"><a href="blog-post.php?post_id=' . $post_id . '">' . $title . '</h3>';
+                $html .= '<ul class="post-meta">';
+                $html .= '<li><a href="author.php">' . $author . '</a></li>';
+                $html .= '<li>' . $created_at . '</li>';
+                $html .= '</ul>';
+                $html .= '</div>';
+                $html .= '</div>';
+
+            }
+        }
+        return $html;
+    }
 }

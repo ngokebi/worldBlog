@@ -58,29 +58,29 @@
 #current blog post
 
 $blog_id = 5;
-$b_query=$conn->prepare("SELECT * FROM blogs WHERE blog_id=:id AND blog_status=:status");
+$b_query = $conn->prepare("SELECT * FROM blogs WHERE blog_id=:id AND blog_status=:status");
 $b_query->execute(array(
     'id' => $blog_id,
     'status' => 1
 ));
-$b_query_get=$b_query->fetch(PDO::FETCH_ASSOC);
+$b_query_get = $b_query->fetch(PDO::FETCH_ASSOC);
 
 /* We check the existence of such data from the database. */
-$single_post_control=$b_query->rowCount();
-if($single_post_control == 0   ){
+$single_post_control = $b_query->rowCount();
+if ($single_post_control == 0) {
     echo "error";
     exit;
 }
 
 /* next post - previous post*/
-$b_pre_nex=$conn->prepare("SELECT * FROM blogs WHERE   blog_id = (SELECT MIN(blog_id)  FROM blogs WHERE blog_id > :pre_nex_id AND blog_status=:pre_nex_status )  OR blog_id = (SELECT MAX(blog_id) FROM blogs WHERE blog_id < :pre_nex_id AND blog_status=:pre_nex_status) ");
+$b_pre_nex = $conn->prepare("SELECT * FROM blogs WHERE   blog_id = (SELECT MIN(blog_id)  FROM blogs WHERE blog_id > :pre_nex_id AND blog_status=:pre_nex_status )  OR blog_id = (SELECT MAX(blog_id) FROM blogs WHERE blog_id < :pre_nex_id AND blog_status=:pre_nex_status) ");
 $b_pre_nex->execute(array(
     'pre_nex_id' => $blog_id_get,
     'pre_nex_status' => 1
 ));
 
-$control=$b_pre_nex->rowCount();
-if($control == 0 || $control  > 3  ){
+$control = $b_pre_nex->rowCount();
+if ($control == 0 || $control  > 3) {
     echo "error";
     exit;
 }
@@ -88,16 +88,66 @@ if($control == 0 || $control  > 3  ){
 /* Here, we are splitting our previous and next posts separately.*/
 $prev_post = $b_pre_nex->fetch(PDO::FETCH_ASSOC);
 $next_post = NULL;
-while ( $rows = $b_pre_nex->fetch(PDO::FETCH_ASSOC) ) {
+while ($rows = $b_pre_nex->fetch(PDO::FETCH_ASSOC)) {
     $next_post = $rows;
 }
-if(!isset($next_post)) {
+if (!isset($next_post)) {
     $next_post = null;
 }
 
 
-echo '<a href="#" style="float:left">'.$prev_post['blog_name'].'</a>';
+echo '<a href="#" style="float:left">' . $prev_post['blog_name'] . '</a>';
 
-echo '<a href="#" style="float:right">'.$next_post['blog_name'].'</a>';
+echo '<a href="#" style="float:right">' . $next_post['blog_name'] . '</a>';
 
 
+
+//database connection  
+$conn = mysqli_connect('localhost', 'root', '');
+if (!$conn) {
+    die("Connection failed" . mysqli_connect_error());
+} else {
+    mysqli_select_db($conn, 'pagination');
+}
+
+//define total number of results you want per page  
+$results_per_page = 10;
+
+//find the total number of results stored in the database  
+$query = "select *from alphabet";
+$result = mysqli_query($conn, $query);
+$number_of_result = mysqli_num_rows($result);
+
+//determine the total number of pages available  
+$number_of_page = ceil($number_of_result / $results_per_page);
+
+//determine which page number visitor is currently on  
+if (!isset($_GET['page'])) {
+    $page = 1;
+} else {
+    $page = $_GET['page'];
+}
+
+//determine the sql LIMIT starting number for the results on the displaying page  
+$page_first_result = ($page - 1) * $results_per_page;
+
+//retrieve the selected results from database   
+$query = "SELECT *FROM alphabet LIMIT " . $page_first_result . ',' . $results_per_page;
+$result = mysqli_query($conn, $query);
+
+//display the retrieved result on the webpage  
+while ($row = mysqli_fetch_array($result)) {
+    echo $row['id'] . ' ' . $row['alphabet'] . '</br>';
+}
+
+
+//display the link of the pages in URL  
+for ($page = 1; $page <= $number_of_page; $page++) {
+    echo '<a href = "index2.php?page=' . $page . '">' . $page . ' </a>';
+}
+
+?>
+</body>
+
+
+</html>

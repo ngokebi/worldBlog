@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="footer-widget">
+                <!-- <div class="footer-widget">
                     <h3 class="footer-title">Tags</h3>
                     <div class="tags-widget">
                         <ul>
@@ -58,7 +58,7 @@
                             <li><a href="#">Health</a></li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="col-md-3">
                 <div class="footer-widget">

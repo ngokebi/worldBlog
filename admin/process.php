@@ -229,6 +229,14 @@ function viewPost($id)
   return $myResp;
 }
 
+function loadMore($row)
+{
+  global $post;
+  $myResp = $post->loadMore($row);
+  return $myResp;
+}
+
+
 function InactivePost($id, $username)
 {
   global $post, $log;
@@ -423,6 +431,11 @@ switch ($_POST['action']) {
 
   case "viewPost": {
       echo viewPost($_POST['id'],);
+      break;
+    }
+
+    case "loadMore": {
+      echo loadMore($_POST['row'],);
       break;
     }
 

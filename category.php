@@ -255,7 +255,7 @@ $database = $database->getConnection();
 							a.id as a_id, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
 							FROM posts a 
 							INNER JOIN category b ON a.cat_id = b.id 
-							WHERE b.id = :cat_id ORDER BY a_id DESC LIMIT 5, 5";
+							WHERE b.id = :cat_id ORDER BY a_id DESC LIMIT 5, 50";
 					$query = $database->prepare($sql);
 					$query->bindParam(':cat_id', $cat_id, PDO::PARAM_INT);
 					$query->execute();
@@ -357,9 +357,9 @@ $database = $database->getConnection();
 						</div>
 					</div> -->
 
-					<div class="section-row loadmore text-center">
+					<!-- <div class="section-row loadmore text-center">
 						<a href="#" class="primary-button">Load More</a>
-					</div>
+					</div> -->
 				</div>
 				<div class="col-md-4">
 
@@ -410,7 +410,7 @@ $database = $database->getConnection();
 						$sql = "SELECT a.title, b.category_name, b.id as cat_id, a.main_image, a.long_desc, a.views, 
 										a.id as a_id, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
 										FROM posts a 
-										INNER JOIN category b ON a.cat_id = b.id WHERE a.views > :views";
+										INNER JOIN category b ON a.cat_id = b.id WHERE a.views > :views ORDER BY a.id DESC LIMIT 4";
 						$query_4 = $database->prepare($sql);
 						$query_4->bindParam(':views', $views, PDO::PARAM_INT);
 						$query_4->execute();

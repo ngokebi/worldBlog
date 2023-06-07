@@ -175,12 +175,17 @@ if ($query->rowCount() > 0) {
 								</div>
 								<div class="row">
 									<?php
+									$cat_id = $main_post->cat_id;
+									$author = $main_post->author;
 									$sql = "SELECT a.title, b.category_name, b.id as cat_id, a.main_image, a.long_desc, a.views, 
 											a.id as a_id, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
 											FROM posts a 
 											INNER JOIN category b ON a.cat_id = b.id 
-										     ORDER BY a.id DESC LIMIT 3";
+											WHERE a.cat_id = :cat_id and a.author = :author
+										    ORDER BY a.id DESC LIMIT 1,3";
 									$query = $database->prepare($sql);
+									$query->bindParam(":cat_id", $cat_id, PDO::PARAM_INT);
+									$query->bindParam(":author", $author, PDO::PARAM_STR);
 									$query->execute();
 
 									$results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -433,7 +438,7 @@ if ($query->rowCount() > 0) {
 								$sql = "SELECT a.title, b.category_name, b.id as cat_id, a.main_image, a.long_desc, a.views, 
 										a.id as a_id, a.author, DATE_FORMAT(a.created_at, '%M %d, %Y') as created_at 
 										FROM posts a 
-										INNER JOIN category b ON a.cat_id = b.id WHERE a.views > :views";
+										INNER JOIN category b ON a.cat_id = b.id WHERE a.views > :views ORDER BY a.id DESC LIMIT 4";
 								$query_4 = $database->prepare($sql);
 								$query_4->bindParam(':views', $views, PDO::PARAM_INT);
 								$query_4->execute();
